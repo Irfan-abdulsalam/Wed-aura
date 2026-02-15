@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login | Wed Aura</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background:
+        linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+        url("https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=1600&q=80");
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .login-box {
+      background: white;
+      width: 380px;
+      padding: 35px;
+      border-radius: 18px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.25);
+      position: relative;
+      z-index: 5;
+    }
+
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #800080;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+      position: relative;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: #333;
+    }
+
+    .input-group input {
+      width: 90%;
+      height: 36px;
+      padding: 6px 34px 6px 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 13px;
+    }
+
+    .input-group i {
+      position: absolute;
+      right: 12px;
+      top: 32px;
+      cursor: pointer;
+      color: #800080;
+      font-size: 14px;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(90deg,#800080,#ff0000);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .login-btn:hover {
+      opacity: 0.9;
+    }
+
+    .extra-links {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .extra-links a {
+      text-decoration: none;
+      color: #800080;
+      font-weight: 500;
+    }
+
+    .register-link {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 15px;
+    }
+
+    .register-link a {
+      color: #ff0000;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    /* 🎉 CENTER SUCCESS OVERLAY */
+    .success-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 20;
+    }
+
+    .success-box {
+      background: white;
+      padding: 30px 45px;
+      border-radius: 25px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #800080;
+      box-shadow: 0 0 25px rgba(0,0,0,0.4);
+      animation: pop 0.4s ease;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.6); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* 🎊 CONFETTI */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      top: -10px;
+      animation: fall linear forwards;
+      z-index: 15;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="success-overlay" id="successOverlay">
+  <div class="success-box">🎉 Login Successful!</div>
+</div>
+
+<div class="login-box" id="loginBox">
+  <h2>Login to Wed Aura</h2>
+
+  <form onsubmit="loginUser(event)">
+    <div class="input-group">
+      <label>Email</label>
+      <input type="email" id="email" required>
+    </div>
+
+    <div class="input-group">
+      <label>Password</label>
+      <input type="password" id="password" required>
+      <i class="fa-solid fa-eye" id="togglePassword"></i>
+    </div>
+
+    <button type="submit" class="login-btn">Login</button>
+  </form>
+
+  <div class="extra-links">
+    <a href="#">Forgot Password?</a>
+    <a href="index.html">Back to Home</a>
+  </div>
+
+  <div class="register-link">
+    New User? <a href="register.html">Create Account</a>
+  </div>
+</div>
+
+<script>
+  const passwordInput = document.getElementById("password");
+  const toggleIcon = document.getElementById("togglePassword");
+
+  toggleIcon.onclick = () => {
+    if (passwordInput.type === "password") {
+      passwordInput.type = "text";
+      toggleIcon.classList.replace("fa-eye", "fa-eye-slash");
+    } else {
+      passwordInput.type = "password";
+      toggleIcon.classList.replace("fa-eye-slash", "fa-eye");
+    }
+  };
+
+  function createConfetti(){
+    for(let i = 0; i < 120; i++){
+      const c = document.createElement("div");
+      c.className = "confetti";
+      c.style.left = Math.random() * 100 + "vw";
+      c.style.backgroundColor =
+        ["#ff0000","#800080","#ffd700","#00c853","#2979ff"][Math.floor(Math.random()*5)];
+      c.style.animationDuration = Math.random()*3 + 2 + "s";
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 5000);
+    }
+  }
+
+  function loginUser(e){
+    e.preventDefault();
+
+    localStorage.setItem("loggedIn", "true");
+
+    document.getElementById("loginBox").style.display = "none";   // 🔥 login hide
+    document.getElementById("successOverlay").style.display = "flex";
+
+    createConfetti();
+
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 2000);
+  }
+</script>
+
+</body>
+</html>

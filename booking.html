@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wedding Booking | Wed Aura</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===== THEME ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:#fff0f6;
+  color:#4a004a;
+}
+
+/* HEADER */
+header{
+  background:linear-gradient(90deg,#d63384,#6f42c1);
+  padding:15px 30px;
+  color:#fff;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.logo-text{
+  font-size:22px;
+  font-weight:600;
+}
+
+nav ul{
+  list-style:none;
+  display:flex;
+  gap:20px;
+}
+
+nav a{
+  color:#fff;
+  text-decoration:none;
+  font-weight:500;
+}
+
+nav a.active{
+  text-decoration:underline;
+}
+
+/* SECTION */
+.services{
+  padding:40px 20px;
+  display:flex;
+  justify-content:center;
+}
+
+.booking-box{
+  background:#fff;
+  max-width:550px;
+  width:100%;
+  padding:25px;
+  border-radius:18px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.12);
+}
+
+.booking-box h2,
+.booking-box h3{
+  text-align:center;
+  margin-bottom:15px;
+  color:#6f42c1;
+}
+
+label{
+  margin-top:10px;
+  display:block;
+  font-weight:500;
+}
+
+input, textarea{
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+
+textarea{
+  resize:none;
+}
+
+hr{
+  margin:20px 0;
+}
+
+/* SERVICE LIST */
+.service-item{
+  background:#fff0f6;
+  padding:10px;
+  border-radius:10px;
+  margin-bottom:8px;
+  font-size:14px;
+}
+
+.total{
+  font-size:18px;
+  margin:15px 0;
+  color:#d63384;
+  text-align:center;
+}
+
+/* BUTTON */
+.btn-book{
+  width:100%;
+  padding:12px;
+  background:linear-gradient(45deg,#ff4d6d,#d63384);
+  border:none;
+  border-radius:25px;
+  color:#fff;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.btn-book:hover{
+  opacity:0.9;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:15px;
+  background:#6f42c1;
+  color:#fff;
+  margin-top:30px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <span class="logo-text">Wed Aura</span>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="booking.html" class="active">Booking</a></li>
+      <li><a href="payment.html">Payment</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- BOOKING SECTION -->
+<section class="services">
+
+<div class="booking-box">
+
+<h2>Wedding Booking Details</h2>
+
+<!-- CUSTOMER DETAILS -->
+<label>Customer Name</label>
+<input type="text" id="customerName" placeholder="Enter your name">
+
+<label>Phone Number</label>
+<input type="text" id="phone" placeholder="Enter phone number">
+
+<label>Wedding Date</label>
+<input type="date" id="eventDate">
+
+<label>Address</label>
+<textarea id="address" placeholder="Enter address"></textarea>
+
+<hr>
+
+<!-- SELECTED SERVICES -->
+<h3>Selected Wedding Services</h3>
+<div id="serviceList"></div>
+
+<p class="total">
+<strong>Total Amount: ₹<span id="totalPrice">0</span></strong>
+</p>
+
+<button class="btn-book" onclick="goToPayment()">Proceed to Payment</button>
+
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+© 2025 Wed Aura | All Rights Reserved
+</footer>
+
+<!-- ===== SCRIPT ===== -->
+<script>
+/*
+Each page (dress, makeup, hall, etc.)
+should save like this:
+
+localStorage.selectedServices = [
+ {category:'Dress', name:'Bridal Lehenga', price:25000},
+ {category:'Makeup', name:'Bridal Makeup', price:15000}
+]
+*/
+
+let services = JSON.parse(localStorage.getItem("selectedServices")) || [];
+let serviceList = document.getElementById("serviceList");
+let totalBox = document.getElementById("totalPrice");
+
+function renderServices(){
+  serviceList.innerHTML = "";
+  let total = 0;
+
+  if(services.length === 0){
+    serviceList.innerHTML = "<p>No services selected</p>";
+    totalBox.innerText = "0";
+    return;
+  }
+
+  services.forEach((item,index)=>{
+    let itemTotal = item.price * item.qty;
+    total += itemTotal;
+
+    serviceList.innerHTML += `
+      <div class="service-item">
+        <strong>${item.category}</strong> – ${item.name}<br>
+        Price: ₹${item.price} × ${item.qty}<br>
+        Size: ${item.size}<br>
+        <b>Subtotal: ₹${itemTotal}</b>
+        <span style="float:right;color:red;cursor:pointer"
+              onclick="removeService(${index})">✖</span>
+      </div>
+    `;
+  });
+
+  totalBox.innerText = total;
+  localStorage.setItem("finalAmount", total);
+}
+
+function removeService(i){
+  services.splice(i,1);
+  localStorage.setItem("selectedServices", JSON.stringify(services));
+  renderServices();
+}
+
+renderServices();
+
+/* CUSTOMER DETAILS + PAYMENT */
+function goToPayment(){
+  localStorage.setItem("customerName",
+    document.getElementById("customerName").value);
+
+  localStorage.setItem("phone",
+    document.getElementById("phone").value);
+
+  localStorage.setItem("eventDate",
+    document.getElementById("eventDate").value);
+
+  localStorage.setItem("address",
+    document.getElementById("address").value);
+
+  window.location.href = "payment.html";
+}
+</script>
+
+</body>
+</html>

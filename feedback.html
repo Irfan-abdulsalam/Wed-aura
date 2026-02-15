@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Feedback | WedAura</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+margin:0;
+font-family:Poppins,sans-serif;
+background:
+linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
+url("https://m.media-amazon.com/images/I/91rPilzIWkL.jpg");
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+text-align:center;
+overflow:hidden;
+color:#fff;
+}
+
+
+
+/* Title */
+h2{
+margin-top:60px;
+color:#ffffff;
+font-weight:500;
+text-shadow:0 3px 8px rgba(0,0,0,0.6);
+}
+
+
+/* Stars */
+.stars{
+font-size:60px;   /* ⭐ size increase */
+margin-top:25px;
+letter-spacing:10px;  /* gap between stars */
+}
+
+
+
+.star{
+cursor:pointer;
+color:#f1f1f1;
+transition:.3s;
+text-shadow:0 4px 12px rgba(0,0,0,0.9);
+}
+
+.star:hover{
+transform:scale(1.2);
+}
+
+
+.star.active{
+color:#ffcc33;
+text-shadow:0 0 15px rgba(255,204,51,0.9);
+}
+
+
+/* Reaction */
+#reaction{
+margin-top:35px;
+font-size:38px;
+height:60px;
+text-shadow:0 3px 10px rgba(0,0,0,0.7);
+}
+
+
+/* Video Scene */
+#videoScene{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100vh;
+background:transparent;
+justify-content:center;
+align-items:center;
+z-index:999;
+pointer-events:none;
+}
+
+
+#videoScene video{
+width:520px;
+max-width:92%;
+border-radius:20px;
+box-shadow:0 20px 40px rgba(0,0,0,0.4);
+}
+
+
+
+/* Flower shower */
+.flower{
+position:absolute;
+top:-20px;
+font-size:22px;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+to{
+transform:translateY(100vh) rotate(360deg);
+opacity:0;
+}
+}
+
+/* Wish Section (overlay text on video) */
+#wish{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100vh;
+z-index:1000;
+
+background:transparent;
+text-align:center;
+pointer-events:none;
+}
+
+
+
+
+
+/* Top Wish Text */
+.wish-top{
+position:absolute;
+top:40px;                 /* video mela gap */
+left:50%;
+transform:translateX(-50%);
+
+color:#ffffff;
+font-size:34px;
+font-weight:600;
+word-spacing:16px;        /* words gap மட்டும் */
+letter-spacing:normal;
+
+text-shadow:0 4px 18px rgba(0,0,0,0.9);
+}
+
+
+/* Bottom Thank You Text */
+.wish-bottom{
+position:absolute;
+bottom:50px;              /* screen bottom la fix */
+left:50%;
+transform:translateX(-50%);
+
+color:#ffffff;
+font-size:26px;
+font-weight:500;
+word-spacing:16px;        /* words gap மட்டும் */
+letter-spacing:normal;
+
+text-shadow:0 4px 18px rgba(0,0,0,1);
+}
+
+
+
+
+.wish-top span,
+.wish-bottom span{
+opacity:0;
+display:inline-block;
+transform:translateY(20px);
+animation:wordFade 0.6s forwards;
+}
+
+@keyframes wordFade{
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+.wish-text{
+    color:#ffffff;
+    font-size:28px;
+    letter-spacing:4px;     /* word gap */
+    text-align:center;
+    font-weight:500;
+}
+.wish-top span,
+.wish-bottom span{
+    margin-right:13px;   /* words ku gap */
+}
+#feedbackText{
+color:#ffffff !important;   /* force white */
+font-size:26px;
+font-weight:600;
+margin-top:18px;
+
+background:none;
+padding:0;
+
+text-shadow:
+0 2px 6px rgba(0,0,0,0.8),
+0 4px 14px rgba(0,0,0,0.9),
+0 0 8px rgba(255,255,255,0.4);
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+<h2>How was your Wedding Experience?</h2>
+
+<div class="stars">
+<span class="star" onclick="rate(1)">★</span>
+<span class="star" onclick="rate(2)">★</span>
+<span class="star" onclick="rate(3)">★</span>
+<span class="star" onclick="rate(4)">★</span>
+<span class="star" onclick="rate(5)">★</span>
+</div>
+
+<div id="reaction"></div>
+
+<!-- REAL RING EXCHANGE VIDEO -->
+<div id="videoScene">
+<video id="ringVideo" autoplay muted>
+<source src="https://v.ftcdn.net/02/96/94/16/700_F_296941657_Xa4vQD33gmEN44KTJB5FaaGKYPlvZAdx_ST.mp4" type="video/mp4">
+</video>
+</div>
+
+<div id="feedbackText" style="margin-top:10px;color:#777;font-size:16px;"></div>
+
+<div id="wish">
+<div class="wish-top">💍 Wishing You a Beautiful Married Life 💖</div>
+<div class="wish-bottom">🙏 Thank You for Using WedAura 🌸</div>
+</div>
+
+
+<script>
+const stars = document.querySelectorAll('.star');
+const reaction = document.getElementById('reaction');
+const videoScene = document.getElementById('videoScene');
+const wish = document.getElementById('wish');
+const feedbackText = document.getElementById('feedbackText');
+const video = document.getElementById('ringVideo');
+
+function rate(num){
+
+stars.forEach((s,i)=>{
+s.classList.toggle('active', i < num);
+});
+
+feedbackText.innerHTML = "";
+
+if(num===1){
+reaction.innerHTML="💔";
+feedbackText.innerHTML="We’re sorry 😔 We'll improve our services.";
+}
+
+if(num===2){
+reaction.innerHTML="💖";
+feedbackText.innerHTML="Thanks! We'll try to make it better 💐";
+}
+
+if(num===3){
+reaction.innerHTML="💗💞";
+feedbackText.innerHTML="Glad you liked it! We’ll improve even more ✨";
+}
+
+if(num===4){
+reaction.innerHTML="💘💖💘";
+feedbackText.innerHTML="Wonderful! Thank you for your support 💞";
+}
+
+if(num===5){
+    reaction.innerHTML="";
+    feedbackText.innerHTML="";
+
+    document.querySelector('.stars').style.display="none";
+    document.querySelector('h2').style.display="none";
+
+    videoScene.style.display="flex";
+    wish.style.display="block";
+
+    const topText = document.querySelector('.wish-top');
+    const bottomText = document.querySelector('.wish-bottom');
+    bottomText.style.opacity = "0";
+
+    // Animate top and get exact duration
+    let topDuration = animateText(topText, 0.7); // 0.7s per word
+
+    // Start bottom text exactly after top animation finished
+    setTimeout(()=>{
+        bottomText.style.opacity = "1";
+        animateText(bottomText, 0.7);
+    }, topDuration + 500); // 500ms buffer for icon + smoothness
+
+    video.currentTime = 0;
+    video.play();
+
+    startFinalAnimation();
+}
+}
+
+
+function animateText(element, wordDelay = 0.7){
+    let words = element.innerText.split(" ");
+    element.innerHTML = "";
+    words.forEach((word,i)=>{
+        let span = document.createElement("span");
+        span.innerText = word + " ";
+        span.style.animationDelay = (i * wordDelay) + "s"; // delay per word
+        element.appendChild(span);
+    });
+    return words.length * wordDelay * 1000; // return total duration in ms
+}
+
+
+
+function startFinalAnimation(){
+
+/* Flower Shower */
+for(let i=0;i<30;i++){
+let flower=document.createElement("div");
+flower.className="flower";
+flower.innerHTML="🌸";
+flower.style.left=Math.random()*100+"%";
+flower.style.animationDuration=(3+Math.random()*2)+"s";
+document.body.appendChild(flower);
+}
+
+/* When video ends */
+video.onended = function(){
+
+/* Wait 5 seconds → then go home */
+setTimeout(()=>{
+window.location.href="index.html";
+},2000);
+
+};
+
+}
+</script>
+
+
+</body>
+</html>

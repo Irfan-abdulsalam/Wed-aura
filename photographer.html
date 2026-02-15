@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Photographer | Wed Aura</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{background:#f9f5f9}
+
+/* NAVBAR */
+nav{
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:#fff;
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.nav-left{font-size:22px;font-weight:900}
+.nav-right{display:flex;gap:25px;align-items:center}
+.nav-right a{
+  color:white;
+  text-decoration:none;
+  font-weight:700;
+  cursor:pointer;
+  position:relative;
+}
+
+/* CART BADGE */
+.badge{
+  position:absolute;
+  top:-8px;
+  right:-12px;
+  background:red;
+  color:#fff;
+  font-size:11px;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+}
+
+/* SERVICES */
+.services-box{
+  display:none;
+  background:#fff;
+  padding:15px;
+  position:absolute;
+  top:65px;
+  right:30px;
+  width:280px;
+  border-radius:12px;
+  box-shadow:0 0 20px rgba(0,0,0,.2);
+  z-index:99;
+}
+.services-box h4{
+  text-align:center;
+  color:#800080;
+  margin-bottom:10px;
+}
+.service-item{
+  padding:8px;
+  border-radius:8px;
+  cursor:pointer;
+}
+.service-item:hover{
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:#fff;
+}
+
+/* PAGE */
+.container{display:flex;gap:20px;padding:20px}
+
+/* GRID */
+.grid{
+  flex:2;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+.card{
+  background:#fff;
+  border-radius:14px;
+  padding:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,.1);
+}
+.card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+/* CART ICON */
+.nav-right a[href="cart.html"]{
+  color:#111;
+  font-size:22px;
+}
+.nav-right a[href="cart.html"] .badge{
+  background:#fff;
+  color:#000;
+  font-weight:800;
+}
+
+.price-tag{
+  margin-top:6px;
+  font-weight:700;
+  color:#800080;
+}
+.studio{
+  font-size:13px;
+  margin-top:3px;
+  color:#444;
+}
+
+/* DETAILS PANEL */
+.details{
+  flex:1;
+  background:#fff;
+  border-radius:15px;
+  padding:15px;
+  box-shadow:0 0 20px rgba(0,0,0,.2);
+  display:none;
+  position:relative;
+}
+.close{
+  position:absolute;
+  top:10px;
+  right:12px;
+  cursor:pointer;
+  font-weight:bold;
+}
+.details img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:12px;
+}
+
+.box{
+  background:#f2e6f7;
+  padding:10px;
+  border-radius:10px;
+  margin:8px 0;
+}
+
+.bold-price{
+  font-size:18px;
+  font-weight:900;
+  color:#800080;
+}
+
+.stars span{
+  font-size:22px;
+  cursor:pointer;
+  color:#ccc;
+}
+.stars span.active{color:gold}
+
+.btn{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+  margin-top:8px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="nav-left">WED AURA - Photographer</div>
+  <div class="nav-right">
+    <a href="index.html">Home</a>
+    <a onclick="toggleServices()">Services ▼</a>
+    <a href="cart.html">🛒 <span class="badge" id="cartCount">0</span></a>
+  </div>
+</nav>
+
+<div class="services-box" id="services">
+  <h4>OUR SERVICES</h4>
+  <div class="service-item" onclick="go('dress.html')">👗 Dresses</div>
+  <div class="service-item" onclick="go('accessories.html')">💍 Accessories</div>
+  <div class="service-item" onclick="go('decoration.html')">🎀 Decorations</div>
+  <div class="service-item" onclick="go('flowers.html')">🌸 Flowers</div>
+  <div class="service-item" onclick="go('halls.html')">🏰 Halls</div>
+  <div class="service-item" onclick="go('makeup.html')">💄 Makeup</div>
+  <div class="service-item" onclick="go('mehandhi.html')">✋ Mehandhi</div>
+  <div class="service-item" onclick="go('catering.html')">🍽 Catering</div>
+  <div class="service-item" onclick="go('invitations.html')">💌 Invitations</div>
+  <div class="service-item" onclick="go('photographer.html')">📸 Photographer</div>
+  <div class="service-item" onclick="go('booking.html')">📅 Booking / Payment</div>
+</div>
+
+<div class="container">
+
+<div class="grid" id="grid"></div>
+
+<div class="details" id="details">
+  <div class="close" onclick="details.style.display='none'">✖</div>
+  <img id="mainImg">
+
+  <div class="bold-price">📸 Total Price : ₹<span id="price"></span></div>
+
+ <div class="box">
+  🏢 Studio : <span id="dStudio"></span> <br>
+  👨 Photographer : <span id="dArtist"></span> <br>
+  📞 Phone : <span id="dPhone"></span>
+</div>
+
+<div class="box">
+  ⭐ Experience : <span id="dExp"></span> <br>
+  📷 Other Services : Wedding, Pre-Wedding, Candid, Drone, Album
+</div>
+
+  
+  <div class="stars">
+    <span onclick="rate(1)">★</span>
+    <span onclick="rate(2)">★</span>
+    <span onclick="rate(3)">★</span>
+    <span onclick="rate(4)">★</span>
+    <span onclick="rate(5)">★</span>
+  </div>
+
+  <button class="btn" onclick="addToCart()">🛒 Add to Cart</button>
+  <button class="btn" onclick="go('booking.html')">📅 Booking Now</button>
+</div>
+
+</div>
+
+<script>
+let grid = document.getElementById("grid");
+
+/* ONLY IMAGE LINKS CHANGED */
+let products = [
+  { img:"https://www.brides.com/thmb/6bxl7lGFhU3r71fZcL2o2hO3cyQ=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/questions-to-asj-wedding-photographer-recirc-getty-images--61ea34e9e287426d9ca41ae4615e964a.jpg",
+price:8700,
+    studio:"Lens Art Photography",
+    artist:"Arjun",
+    phone:"9988776655",
+    experience:"7+ Years"
+    },
+  { img:"https://www.shaadidukaan.com/vogue/wp-content/uploads/2024/03/image-63.png",
+  price:9400,
+    studio:"Royal Clicks",
+    artist:"Karthika",
+    phone:"9876543210",
+    experience:"5+ Years" },
+  { img:"https://www.techthirsty.com/wp-content/uploads/2021/05/best-camera-for-wedding-photography.jpg", 
+price:10100,
+    studio:"Dream Shot Studio",
+    artist:"Vignesh",
+    phone:"9123456780",
+    experience:"6+ Years"  },
+  { img:"https://yourweddingphotographer.uk/wp-content/uploads/2025/05/film-vs-digital-wedding-photography-1300x867.jpg.webp", 
+price:10800,
+    studio:"Wedding Frames",
+    artist:"AJ",
+    phone:"9001122334",
+    experience:"8+ Years"  },
+  { img:"https://evolvevideographytraining.com/wp-content/uploads/2018/01/emma-belle-sass-1024x675-1.jpg", 
+price:11500,
+    studio:"Elite Pixels",
+    artist:"Sam",
+    phone:"8899776655",
+    experience:"4+ Years"  },
+  { img:"https://i0.wp.com/trulymadly.com/blog/wp-content/uploads/2021/11/91c463f4f3e44f19ceb19be6a1549c1d-e1636350828583.jpg?resize=562%2C659&ssl=1", 
+price:12200,
+    studio:"Focus Pro",
+    artist:"Naveen",
+    phone:"9012345678",
+    experience:"9+ Years"  },
+  { img:"https://akshitphotography.com/wp-content/uploads/2023/08/15-1-scaled.jpg", 
+price:12900,
+    studio:"Magic Moments",
+    artist:"Praveen",
+    phone:"9345678123",
+    experience:"10+ Years"  },
+  { img:"https://img.weddingbazaar.com/photos/pictures/005/912/596/new_medium/trending_couples2.jpg?1675580847", 
+price:13600,
+    studio:"Capture Life",
+    artist:"Ajith",
+    phone:"9567812345",
+    experience:"6+ Years"  }
+];
+
+grid.innerHTML="";
+products.forEach(p=>{
+  grid.innerHTML+=`
+  <div class="card">
+    <img src="${p.img}" onclick='openDetails(${JSON.stringify(p)})'>
+    <div class="price-tag">📸 ₹${p.price} Full Package</div>
+    <div class="studio">🏢 ${p.studio}</div>
+  </div>`;
+});
+
+let current;
+function openDetails(p){
+  current = p;
+  details.style.display = "block";
+  mainImg.src = p.img;
+  price.innerText = p.price;
+
+  dStudio.innerText = p.studio;
+  dArtist.innerText = p.artist;
+  dPhone.innerText = p.phone;
+  dExp.innerText = p.experience;
+}
+
+
+function addToCart(){
+  let cart=JSON.parse(localStorage.getItem("cart"))||[];
+  cart.push({
+    category:"Photographer",
+    name:"Photography Package",
+    price:current.price,
+    img:current.img,
+    qty:1
+  });
+  localStorage.setItem("cart",JSON.stringify(cart));
+  window.location.href="cart.html";
+}
+
+cartCount.innerText=(JSON.parse(localStorage.getItem("cart"))||[]).length;
+
+function toggleServices(){
+  services.style.display = services.style.display==="block"?"none":"block";
+}
+function go(p){window.location.href=p;}
+
+function rate(n){
+  document.querySelectorAll(".stars span").forEach((s,i)=>{
+    s.classList.toggle("active",i<n);
+  });
+}
+</script>
+
+</body>
+</html>

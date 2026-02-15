@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wedding Halls | Wed Aura</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#f9f5f9;
+}
+/* NAVBAR */
+nav{
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:#fff;
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.nav-left{
+  font-size:22px;
+  font-weight:900;
+}
+
+.nav-right{
+  display:flex;
+  gap:25px;
+  align-items:center;
+  flex-wrap:nowrap;
+}
+
+.nav-right a{
+  color:white;
+  text-decoration:none;
+  font-weight:700;
+  cursor:pointer;
+  position:relative;
+}
+
+/* CART BADGE */
+.badge{
+  position:absolute;
+  top:-8px;
+  right:-12px;
+  background:#fff;
+  color:#000;
+  font-size:11px;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+}
+
+/* SERVICE BUTTON */
+.service-btn{
+  background:rgba(255,255,255,.25);
+  padding:6px 14px;
+  border-radius:20px;
+}
+
+/* SERVICES DROPDOWN */
+.services-box{
+  display:none;
+  background:#fff;
+  padding:15px;
+  position:absolute;
+  top:65px;
+  right:30px;
+  width:280px;
+  border-radius:12px;
+  box-shadow:0 0 20px rgba(0,0,0,.2);
+  z-index:99;
+}
+.services-box h4{
+  text-align:center;
+  color:#800080;
+  margin-bottom:10px;
+}
+.service-item{
+  padding:8px;
+  border-radius:8px;
+  cursor:pointer;
+}
+.service-item:hover{
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:#fff;
+}
+
+/* CART ICON DARK */
+.nav-right a[href="cart.html"]{
+  color:#111;
+  font-size:22px;
+}
+
+/* NAVBAR */
+.navbar{
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:white;
+  padding:15px 30px;
+  font-size:22px;
+  font-weight:bold;
+}
+
+/* HALL GRID */
+.container{
+  padding:30px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+}
+
+.hall{
+  background:white;
+  border-radius:15px;
+  box-shadow:0 0 15px rgba(0,0,0,0.15);
+  overflow:hidden;
+  cursor:pointer;
+}
+
+.hall img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+}
+
+.hall .info{
+  padding:15px;
+}
+
+.hall h3{margin:0}
+.hall p{color:#555}
+.price{color:#800080;font-weight:bold}
+
+/* POPUP */
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+.popup-box{
+  background:white;
+  width:90%;
+  max-width:1000px;
+  border-radius:15px;
+  padding:20px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+  position:relative;
+}
+
+.close{
+  position:absolute;
+  top:10px;
+  right:15px;
+  font-size:22px;
+  cursor:pointer;
+}
+
+/* IMAGE SECTION */
+.main-img{
+  width:100%;
+  height:300px;
+  object-fit:cover;
+  border-radius:10px;
+  transition:0.4s;
+  cursor:zoom-in;
+}
+
+.main-img:hover{
+  transform:scale(1.25);
+}
+
+.sub{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+}
+
+.sub img{
+  width:90px;
+  height:70px;
+  object-fit:cover;
+  border-radius:6px;
+  cursor:pointer;
+  border:2px solid transparent;
+}
+
+.sub img:hover{
+  border:2px solid #800080;
+}
+
+/* DETAILS */
+.details h2{margin-top:0}
+
+.details label{
+  display:block;
+  margin-top:10px;
+  font-weight:bold;
+}
+
+.details select,
+.details input{
+  width:100%;
+  padding:8px;
+  margin-top:5px;
+}
+
+/* ⭐ SIMPLE RATING (UNCHANGED MODEL) */
+.rating{
+  margin-top:10px;
+  font-size:22px;
+  color:gold;
+}
+
+/* MAP */
+.map{
+  margin-top:15px;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+/* TOTAL + BUTTONS */
+.total{
+  margin-top:15px;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.btns{
+  display:flex;
+  gap:10px;
+  margin-top:15px;
+}
+
+.btn{
+  flex:1;
+  padding:12px;
+  border:none;
+  border-radius:25px;
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:white;
+  cursor:pointer;
+  font-size:15px;
+}
+.rating-box{
+  margin-top:10px;
+}
+
+.star{
+  font-size:28px;
+  color:#ccc;
+  cursor:pointer;
+}
+
+.star.active{
+  color:gold;
+}
+.details{
+  width:35%;
+  border-left:1px solid #ddd;
+  padding:15px;
+  display:none;
+  position:relative;
+  max-height:calc(100vh - 120px);
+  overflow-y:auto;
+}
+
+/* CLOSE BUTTON */
+.details .close{
+  position:sticky;
+  top:0;
+  right:0;
+  font-size:22px;
+  cursor:pointer;
+  float:right;
+  background:#fff;
+  padding:4px 8px;
+  border-radius:50%;
+  z-index:10;
+}
+
+
+</style>
+</head>
+
+<body>  
+
+
+
+
+<nav>
+  <div class="nav-left">WED AURA - Wedding Halls</div>
+
+  <div class="nav-right">
+    <a href="index.html">Home</a>
+    <a class="service-btn" onclick="toggleServices()">Services ▼</a>
+    <a href="cart.html">🛒 <span class="badge" id="cartCount">0</span></a>
+  </div>
+</nav>
+
+<!-- SERVICES DROPDOWN -->
+<div class="services-box" id="services">
+  <h4>OUR SERVICES</h4>
+  <div class="service-item" onclick="go('dress.html')">👗 Dresses</div>
+  <div class="service-item" onclick="go('accessories.html')">💍 Accessories</div>
+  <div class="service-item" onclick="go('decoration.html')">🎀 Decorations</div>
+  <div class="service-item" onclick="go('flowers.html')">🌸 Flowers</div>
+  <div class="service-item" onclick="go('halls.html')">🏰 Halls</div>
+  <div class="service-item" onclick="go('makeup.html')">💄 Makeup</div>
+  <div class="service-item" onclick="go('mehandi.html')">✋ Mehandhi</div>
+  <div class="service-item" onclick="go('catering.html')">🍽 Catering</div>
+  <div class="service-item" onclick="go('invitations.html')">💌 Invitations</div>
+  <div class="service-item" onclick="go('photographer.html')">📸 Photographer</div>
+  <div class="service-item" onclick="go('booking.html')">📅 Booking / Payment</div>
+</div>
+
+
+<!-- ================= HALL LIST (10 HALLS) ================= -->
+<div class="container">
+  <script>
+    const halls = Array.from({length:10},(_,i)=>`
+      <div class="hall" onclick="openHall('Royal Hall ${i+1}')">
+        <img src="hall${i+1}.jpg">
+        <div class="info">
+          <h3>Royal Hall ${i+1}</h3>
+          <p>Chennai</p>
+          <div class="price">₹1,50,000 / day</div>
+        </div>
+      </div>
+    `).join("");
+    document.write(halls);
+  </script>
+</div>
+
+<!-- ================= POPUP ================= -->
+<div class="popup" id="popup">
+  <div class="popup-box">
+
+    <div class="close" onclick="closePopup()">✖</div>
+
+    <!-- LEFT -->
+    <div>
+      <img id="mainImg" src="hall1.jpg" class="main-img">
+      <div class="sub">
+        <img src="hall1.jpg" onclick="changeImg(this)">
+        <img src="hall2.jpg" onclick="changeImg(this)">
+        <img src="hall3.jpg" onclick="changeImg(this)">
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="details">
+      <h2 id="hallName"></h2>
+      <p>📍 Anna Nagar, Chennai</p>
+
+      <div class="rating-box">
+  <span class="star" onclick="rate(1)">★</span>
+  <span class="star" onclick="rate(2)">★</span>
+  <span class="star" onclick="rate(3)">★</span>
+  <span class="star" onclick="rate(4)">★</span>
+  <span class="star" onclick="rate(5)">★</span>
+</div>
+<p id="ratingText" style="font-size:14px;color:#555;"></p>
+
+
+      <label>AC / Non-AC</label>
+      <select id="ac" onchange="calc()">
+        <option value="0">Non-AC</option>
+        <option value="20000">AC (+₹20,000)</option>
+      </select>
+
+      <label>No of Days</label>
+      <select id="days" onchange="calc()">
+        <option value="1">1 Day</option>
+        <option value="2">2 Days</option>
+        <option value="3">3 Days</option>
+      </select>
+
+      <label>Seating Capacity</label>
+      <input type="text" value="800 Guests" disabled>
+
+      <label>Available Date</label>
+      <input type="date">
+
+      <!-- GOOGLE MAP -->
+      <div class="map">
+        <iframe 
+          src="https://www.google.com/maps?q=chennai&output=embed"
+          width="100%" height="180" style="border:0;" loading="lazy">
+        </iframe>
+      </div>
+
+      <div class="total" id="total">Total: ₹1,50,000</div>
+
+      <div class="btns">
+        <button class="btn" onclick="addCart()">🛒 Add to Cart</button>
+        <button class="btn" onclick="book()">📅 Book Now</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+let basePrice = 150000;
+let currentHall = "";
+
+function openHall(name){
+  currentHall = name;
+  document.getElementById("hallName").innerText = name;
+  document.getElementById("popup").style.display="flex";
+  calc();
+}
+
+function closePopup(){
+  document.getElementById("popup").style.display="none";
+}
+
+function changeImg(el){
+  document.getElementById("mainImg").src = el.src;
+}
+
+function calc(){
+  let days = Number(document.getElementById("days").value);
+  let ac = Number(document.getElementById("ac").value);
+  let total = basePrice * days + ac;
+  document.getElementById("total").innerText = "Total: ₹" + total;
+}
+
+function addCart(){
+  let days = Number(document.getElementById("days").value);
+  let ac = Number(document.getElementById("ac").value);
+  let total = basePrice * days + ac;
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart.push({name:currentHall,total:total});
+  localStorage.setItem("cart",JSON.stringify(cart));
+  window.location.href="cart.html";
+}
+
+function book(){
+  window.location.href="booking.html";
+}
+</script>
+<script>
+function rate(value){
+  const stars = document.querySelectorAll(".star");
+  stars.forEach((star,index)=>{
+    star.classList.toggle("active", index < value);
+  });
+  document.getElementById("ratingText").innerText =
+    "You rated: " + value + " star" + (value>1?"s":"");
+}
+</script>
+
+<script>
+function toggleServices(){
+  services.style.display =
+    services.style.display === "block" ? "none" : "block";
+}
+
+function go(p){
+  window.location.href = p;
+}
+
+function updateCartCount(){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cartCount.innerText = cart.length;
+}
+updateCartCount();
+
+/* CLOSE SERVICES WHEN CLICK OUTSIDE */
+document.addEventListener("click",function(e){
+ if(!e.target.closest(".nav-right")){
+   services.style.display="none";
+ }
+});
+</script>
+
+
+</body>
+</html>

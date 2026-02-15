@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Makeup | Wed Aura</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{background:#f9f5f9}
+
+/* NAVBAR */
+nav{
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:#fff;
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.nav-left{font-size:22px;font-weight:900}
+.nav-right{display:flex;gap:25px;align-items:center}
+.nav-right a{
+  color:white;
+  text-decoration:none;
+  font-weight:700;
+  cursor:pointer;
+  position:relative;
+}
+
+/* CART BADGE */
+.badge{
+  position:absolute;
+  top:-8px;
+  right:-12px;
+  background:red;
+  color:#fff;
+  font-size:11px;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+}
+
+/* SERVICES */
+.services-box{
+  display:none;
+  background:#fff;
+  padding:15px;
+  position:absolute;
+  top:65px;
+  right:30px;
+  width:280px;
+  border-radius:12px;
+  box-shadow:0 0 20px rgba(0,0,0,.2);
+  z-index:99;
+}
+.services-box h4{
+  text-align:center;
+  color:#800080;
+  margin-bottom:10px;
+}
+.service-item{
+  padding:8px;
+  border-radius:8px;
+  cursor:pointer;
+}
+.service-item:hover{
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:#fff;
+}
+
+/* PAGE */
+.container{display:flex;gap:20px;padding:20px}
+
+/* GRID */
+.grid{
+  flex:2;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+.card{
+  background:#fff;
+  border-radius:14px;
+  padding:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,.1);
+}
+.card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+/* CART ICON */
+.nav-right a[href="cart.html"]{
+  color:#111;
+  font-size:22px;
+}
+.nav-right a[href="cart.html"] .badge{
+  background:#fff;
+  color:#000;
+  font-weight:800;
+}
+
+.price-tag{
+  margin-top:6px;
+  font-weight:700;
+  color:#800080;
+}
+.studio{
+  font-size:13px;
+  margin-top:3px;
+  color:#444;
+}
+
+/* DETAILS */
+.details{
+  flex:1;
+  background:#fff;
+  border-radius:15px;
+  padding:15px;
+  box-shadow:0 0 20px rgba(0,0,0,.2);
+  display:none;
+  position:relative;
+}
+.close{
+  position:absolute;
+  top:10px;
+  right:12px;
+  cursor:pointer;
+  font-weight:bold;
+}
+.details img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:12px;
+}
+
+.sub-imgs{
+  display:flex;
+  gap:10px;
+  margin:10px 0;
+}
+.sub-imgs img{
+  width:70px;
+  height:70px;
+  border-radius:10px;
+  cursor:pointer;
+  object-fit:cover;
+  border:2px solid #ddd;
+}
+
+.box{
+  background:#f2e6f7;
+  padding:10px;
+  border-radius:10px;
+  margin:8px 0;
+}
+
+.bold-price{
+  font-size:18px;
+  font-weight:900;
+  color:#800080;
+}
+
+.stars span{
+  font-size:22px;
+  cursor:pointer;
+  color:#ccc;
+}
+.stars span.active{color:gold}
+
+.btn{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+  margin-top:8px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="nav-left">WED AURA - Makeup</div>
+  <div class="nav-right">
+    <a href="index.html">Home</a>
+    <a onclick="toggleServices()">Services ▼</a>
+    <a href="cart.html">🛒 <span class="badge" id="cartCount">0</span></a>
+  </div>
+</nav>
+
+<div class="services-box" id="services">
+  <h4>OUR SERVICES</h4>
+  <div class="service-item" onclick="go('dress.html')">👗 Dresses</div>
+  <div class="service-item" onclick="go('accessories.html')">💍 Accessories</div>
+  <div class="service-item" onclick="go('decoration.html')">🎀 Decorations</div>
+  <div class="service-item" onclick="go('flowers.html')">🌸 Flowers</div>
+  <div class="service-item" onclick="go('halls.html')">🏰 Halls</div>
+  <div class="service-item" onclick="go('makeup.html')">💄 Makeup</div>
+  <div class="service-item" onclick="go('mehandi.html')">✋ Mehandhi</div>
+  <div class="service-item" onclick="go('catering.html')">🍽 Catering</div>
+  <div class="service-item" onclick="go('invitations.html')">💌 Invitations</div>
+  <div class="service-item" onclick="go('photographer.html')">📸 Photographer</div>
+  <div class="service-item" onclick="go('booking.html')">📅 Booking / Payment</div>
+</div>
+
+<div class="container">
+
+<div class="grid" id="grid"></div>
+
+<div class="details" id="details">
+  <div class="close" onclick="details.style.display='none'">✖</div>
+  <img id="mainImg">
+
+  <div class="sub-imgs" id="subs"></div>
+
+  <div class="bold-price">💄 Total Price : ₹<span id="price"></span></div>
+
+  <div class="box">
+    🏢 Makeup Studio : <span id="dStudio"></span><br>
+    👩 Artist : <span id="dArtist"></span><br>
+    📞 Phone : <span id="dPhone"></span>
+  </div>
+
+  <div class="box">
+    ⭐ Experience : <span id="dExp"></span><br>
+    💄 Other Services : Bridal, HD Makeup, Party Look, Reception Makeup, Hair Styling
+  </div>
+
+  <div class="stars">
+    <span onclick="rate(1)">★</span>
+    <span onclick="rate(2)">★</span>
+    <span onclick="rate(3)">★</span>
+    <span onclick="rate(4)">★</span>
+    <span onclick="rate(5)">★</span>
+  </div>
+
+  <button class="btn" onclick="addToCart()">🛒 Add to Cart</button>
+  <button class="btn" onclick="go('booking.html')">📅 Booking Now</button>
+</div>
+
+</div>
+
+<script>
+let products = [
+  {
+    img:"https://ciceroni.in/cdn/shop/articles/top-12-bridal-makeup-artists-to-look-out-for-in-ahmedabad-480982.png?v=168389012",
+    price:5500,
+    studio:"Glam Beauty Studio",
+    artist:"Priya",
+    phone:"9876543210"
+  },
+  {
+    img:"https://5.imimg.com/data5/ANDROID/Default/2022/3/ZC/GR/UP/61494352/product-jpeg-500x500.jpeg",
+    
+    price:6000,
+    studio:"Royal Glow Makeup",
+    artist:"Anitha",
+    phone:"9123456789"
+  },
+  {
+    img:"https://www.kapilssalon.com/wp-content/uploads/2021/03/Professional-Makeup-Artist-scaled.webp",
+    
+    price:6500,
+    studio:"Elite Bridal Studio",
+    artist:"Kavya",
+    phone:"9001122334"
+  },
+  {
+    img:"https://www.partyone.in/suploads/2024/Feb/05/27849/1707120646make_up.webp",
+    
+    price:7000,
+    studio:"Makeover Pro",
+    artist:"Divya",
+    phone:"8899776655"
+  },
+  {
+    img:"https://www.khoobsurat.in/uploaded-files/blog/images/How-To-Pick-The-Best-Bridal-Makeup-Artist-For-Your-Wedding-Day45.jpg",
+    
+    price:7500,
+    studio:"Blush & Glow",
+    artist:"Sneha",
+    phone:"9345678123"
+  },
+  {
+    img:"https://sp-ao.shortpixel.ai/client/to_auto,q_glossy,ret_img,w_500,h_313/https://bridemeup.in/wp-content/uploads/2019/10/z5.jpg",
+
+    price:8000,
+    studio:"Luxury Looks",
+    artist:"Meena",
+    phone:"9567812345"
+  },
+  {
+    img:"https://5.imimg.com/data5/SELLER/Default/2024/9/454649464/HV/QA/VW/225202498/bridal-makeup-aliganj-lucknow.jpg",
+    
+    price:8500,
+    studio:"Classic Bride Studio",
+    artist:"Aarthi",
+    phone:"9786541230"
+  },
+  {
+    img:"https://www.khoobsurat.in/uploaded-files/blog/images/The-Perfect-Bride-Top-Bridal-Makeup-Artists-&-Permanent-Makeup-Options-in-Delhi40.jpg",
+    
+    price:9000,
+    studio:"Perfect Glow",
+    artist:"Lakshmi",
+    phone:"9911223344"
+  }
+];
+
+
+
+let grid=document.getElementById("grid");
+grid.innerHTML="";
+products.forEach(p=>{
+  grid.innerHTML+=`
+  <div class="card">
+    <img src="${p.img}" onclick="openDetails(${JSON.stringify(p).replace(/"/g,'&quot;')})">
+    <div class="price-tag">💄 ₹${p.price} Full Package</div>
+    <div class="studio">🏢 ${p.studio}</div>
+  </div>`;
+});
+
+let current;
+function openDetails(p){
+  current=p;
+  details.style.display="block";
+  mainImg.src=p.img;
+  price.innerText=p.price;
+
+  document.querySelector(".box").innerHTML = `
+🏢 Makeup Studio : ${p.studio} <br>
+👩 Artist : ${p.artist} <br>
+📞 Phone : ${p.phone}
+`;
+
+
+  subs.innerHTML="";
+ p.subs.forEach(s=>{
+  let img = document.createElement("img");
+  img.src = s;
+  img.onclick = () => {
+    mainImg.src = s;
+  };
+  subs.appendChild(img);
+});
+
+}
+
+
+
+function addToCart(){
+  let cart=JSON.parse(localStorage.getItem("cart"))||[];
+  cart.push({
+    category:"Makeup",
+    name:"Makeup Package",
+    price:current.price,
+    img:current.img,
+    qty:1
+  });
+  localStorage.setItem("cart",JSON.stringify(cart));
+  window.location.href="cart.html";
+}
+
+cartCount.innerText=(JSON.parse(localStorage.getItem("cart"))||[]).length;
+
+function toggleServices(){
+  services.style.display = services.style.display==="block"?"none":"block";
+}
+function go(p){window.location.href=p;}
+
+function rate(n){
+  document.querySelectorAll(".stars span").forEach((s,i)=>{
+    s.classList.toggle("active",i<n);
+  });
+}
+</script>
+
+</body>
+</html>

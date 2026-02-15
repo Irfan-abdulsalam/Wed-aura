@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wedding Dress Collection</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+body{background:#f7f2f7}
+
+/* NAVBAR */
+nav{
+ position:fixed;top:0;width:100%;
+ background:linear-gradient(90deg,#800080,#ff0000);
+ padding:24px 36px;
+ display:flex;justify-content:space-between;align-items:center;
+ color:#fff;z-index:100
+}
+.nav-title{font-size:20px;font-weight:800}
+.nav-right{display:flex;align-items:center;gap:26px}
+.nav-right a{color:#fff;text-decoration:none;font-weight:700}
+
+/* SERVICES */
+.services{position:relative}
+.services-btn{
+ padding:8px 18px;
+ border-radius:22px;
+ background:rgba(255,255,255,.18);
+ cursor:pointer;
+ font-weight:700;
+ display:flex;align-items:center;gap:6px
+}
+.services-btn:hover{background:rgba(255,255,255,.28)}
+
+.dropdown{
+ position:absolute;
+ top:50px;
+ left:50%;
+ transform:translateX(-50%);
+ background:#fff;color:#000;
+ width:240px;border-radius:16px;
+ box-shadow:0 12px 30px rgba(0,0,0,.25);
+ display:none;overflow:hidden
+}
+.dropdown.show{display:block}
+
+.dropdown div{
+ padding:12px 18px;
+ display:flex;align-items:center;gap:10px;
+ font-weight:600;cursor:pointer;
+ transition:.3s
+}
+.dropdown div:hover{
+ background:linear-gradient(90deg,#800080,#ff0000);
+ color:#fff
+}
+/* ACTIVE HIGHLIGHT */
+.dropdown div.active{
+ background:linear-gradient(90deg,#800080,#ff0000);
+ color:#fff;
+}
+
+/* CART */
+.cart-btn{cursor:pointer;font-size:22px;position:relative}
+.cart-count{
+ position:absolute;top:-8px;right:-10px;
+ background:#fff;color:#000;
+ font-size:12px;font-weight:800;
+ padding:2px 7px;border-radius:50%
+}
+
+/* SEARCH */
+.search{
+ margin:150px auto 50px;
+ display:flex;justify-content:center;position:relative
+}
+.search input{
+ width:380px;padding:12px 45px 12px 18px;
+ border-radius:30px;border:2px solid #800080
+}
+.search span{
+ position:absolute;right:calc(50% - 170px);
+ top:12px;font-size:18px;color:#800080
+}
+
+/* FILTER */
+.filters{text-align:center;margin-bottom:30px}
+.filters button{
+ padding:10px 34px;border:none;
+ border-radius:30px;margin:0 8px;
+ font-weight:700;cursor:pointer
+}
+.filters .active{
+ background:linear-gradient(90deg,#800080,#ff0000);
+ color:#fff
+}
+
+/* GRID */
+.grid{
+ padding:0 40px 40px;
+ display:grid;
+ grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+ gap:26px
+}
+.card{
+ background:#fff;border-radius:18px;
+ padding:10px;
+ box-shadow:0 6px 16px rgba(0,0,0,.15)
+}
+.card img{
+ width:100%;height:280px;
+ object-fit:cover;border-radius:14px;
+ cursor:pointer
+}
+.name{font-weight:600;margin-top:6px}
+.price{color:#ff0000;font-weight:700}
+
+/* DETAILS PANEL */
+.details{
+ position:fixed;right:-420px;top:96px;
+ width:420px;height:calc(100vh - 96px);
+ background:#fff;
+ box-shadow:-6px 0 20px rgba(0,0,0,.25);
+ padding:18px;
+ transition:.4s;overflow-y:auto;z-index:200
+}
+.details.show{right:0}
+.close{position:absolute;right:14px;top:10px;font-size:22px;cursor:pointer}
+.details img{
+ width:100%;height:260px;
+ object-fit:cover;border-radius:12px
+}
+.rating{display:flex;gap:6px;margin:8px 0}
+.rating span{
+ background:#2ecc71;color:#fff;
+ padding:2px 6px;border-radius:6px;
+ font-weight:700
+}
+
+/* SIZE */
+.sizes{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.sizes button{
+ padding:8px 16px;border-radius:20px;
+ border:2px solid #ccc;background:#fff;
+ cursor:pointer;font-weight:600
+}
+.sizes button.active{
+ background:linear-gradient(90deg,#800080,#ff0000);
+ color:#fff;border-color:#ff0000
+}
+.reminder{color:red;font-size:14px;margin-bottom:10px;display:none}
+
+/* BUTTONS */
+.btn-row{display:flex;gap:12px;margin-top:10px}
+.btn{
+ flex:1;padding:12px;border:none;
+ border-radius:30px;font-size:15px;
+ font-weight:700;cursor:pointer;
+ background:linear-gradient(90deg,#800080,#ff0000);
+ color:#fff
+}
+
+/* DETAILS PRICE HIGHLIGHT */
+#dPrice{color:#ff0000;font-weight:800;font-size:18px;}
+</style>
+</head>
+<body>
+
+<nav>
+ <div class="nav-title">Wedding Dress Collection</div>
+ <div class="nav-right">
+  <a href="index.html">Home</a>
+  <div class="services">
+   <div class="services-btn" onclick="toggleServices()">Services ▼</div>
+   <div class="dropdown" id="servicesMenu">
+    <div data-link="dress.html" onclick="selectService(this)">👗 Dress</div>
+    <div data-link="accessories.html" onclick="selectService(this)">💍 Accessories</div>
+    <div data-link="decoration.html" onclick="selectService(this)">🎀 Decoration</div>
+    <div data-link="flowers.html" onclick="selectService(this)">🌸 Flowers</div>
+    <div data-link="partyhalls.html" onclick="selectService(this)">🏛 Halls</div>
+    <div data-link="mehandi.html" onclick="selectService(this)">🌿 Mehendi</div>
+    <div data-link="makeup.html" onclick="selectService(this)">💄 Makeup</div>
+	<div data-link="catering.html" onclick="selectService(this)">🍽 Catering</div>
+    <div data-link="invitation.html" onclick="selectService(this)">✉️ Invitation</div>
+    <div data-link="photographer.html" onclick="selectService(this)">📸 Photographer</div>
+    <div data-link="booking.html" onclick="selectService(this)">💳 Booking & Payment</div>
+    
+   </div>
+  </div>
+  <div class="cart-btn" onclick="location.href='cart.html'">🛒 <span class="cart-count" id="cartCount">0</span></div>
+ </div>
+</nav>
+
+<div class="search">
+ <input id="searchInput" placeholder="Search dresses...">
+ <span>🔍</span>
+</div>
+
+<div class="filters">
+ <button class="active" onclick="filterType('all',this)">All</button>
+ <button onclick="filterType('bride',this)">Bride</button>
+ <button onclick="filterType('groom',this)">Groom</button>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="details" id="details">
+ <div class="close" onclick="closeDetails()">✖</div>
+ <img id="dImg">
+ <h3 id="dName"></h3>
+ <div class="rating">
+  <span>4.5 ★</span>
+ </div>
+ <p><b>₹ <span id="dPrice"></span></b></p>
+ <div class="reminder" id="reminder">Please select a size</div>
+ <div class="sizes" id="sizes"></div>
+ <p id="detailsText"></p>
+ <div class="btn-row">
+  <button class="btn" onclick="addToCart()">Add to Cart</button>
+  <button class="btn" onclick="buyNow()">Buy Now</button>
+ </div>
+</div>
+
+<script>
+const grid=document.getElementById("grid");
+const details=document.getElementById("details");
+const sizesDiv=document.getElementById("sizes");
+const reminder=document.getElementById("reminder");
+const searchInput=document.getElementById("searchInput");
+let selectedSize="",selectedDress=null;
+
+/* 25 dresses with unique details */
+const dresses = [
+{id:1,name:"Bridal Designer Lehanga",price:2999,type:"bride",img:"https://www.likeadiva.com/images/wedm-banner.jpg",details:{fabric:"Net",work:"Stone Work",occasion:"Wedding",color:"Red",origin:"India"}},
+{id:2,name:"Groom Mehandhi Dress",price:1000,type:"groom",img:"https://images.meesho.com/images/products/647238983/bptbn_512.avif?width=360",details:{fabric:"Jacquard",work:"Embroidery",occasion:"Mehandhi",color:"Green and White",origin:"India"}},
+{id:3,name:"Bridal Gown",price:3499,type:"bride",img:"https://m.media-amazon.com/images/I/41uO+R54t1L._SX679_.jpg",details:{fabric:"Net",work:"Stone and Embroidary",occasion:"Marriage",color:"White",origin:"India"}},
+{id:4,name:"Groom Haldhi Dress",price:1000,type:"groom",img:"https://images.meesho.com/images/products/649005249/cvckh_512.avif?width=512",details:{fabric:"Silk Blend",work:"Designer Stitch",occasion:"Haldhi",color:"yellow",origin:"India"}},
+{id:5,name:"Bridal Mehandhi Dress",price:1050,type:"bride",img:"https://images.meesho.com/images/products/548719073/mgwb7_512.avif?width=512",details:{fabric:"Satin",work:"Embroidary Work",occasion:"Mehandhi",color:"Green",origin:"India"}},
+{id:6,name:"Groom Wedding Kurta",price:3999,type:"groom",img:"https://urbanfashiontailor.com/wp-content/uploads/2025/11/Sherwani002.jpg",details:{fabric:"Cotton Silk",work:"Printed and Stone",occasion:"Marriage",color:"Meroon",origin:"India"}},
+{id:7,name:"Bridal Haldhi Dress",price:1999,type:"bride",img:"https://images.meesho.com/images/products/654673656/bo3qk_512.avif?width=512",details:{fabric:"Georgette",work:"Embroidery",occasion:"Haldhi",color:"Yellow",origin:"India"}},
+{id:8,name:"Groom Reception Dress",price:2000,type:"groom",img:"https://images.meesho.com/images/products/701831237/2zczk_512.avif?width=512",details:{fabric:"Cotton and Silk",work:"Formal",occasion:"Reception",color:"Royal and Sandle",origin:"India"}},
+{id:9,name:"Bridal Heavy Sarara",price:4500,type:"bride",img:"https://images.meesho.com/images/products/707136217/gyeh4_512.avif?width=512",details:{fabric:"Chiffon",work:"Stone Work",occasion:"Wedding",color:"Red",origin:"India"}},
+{id:10,name:"Groom Haldhi Dress",price:1250,type:"groom",img:"https://images.meesho.com/images/products/707075151/svkem_512.avif?width=512",details:{fabric:"Silk",work:"Thread Work",occasion:"Haldhi",color:"Yellow",origin:"India"}},
+{id:11,name:"Bridal Silk Lehanga",price:2799,type:"bride",img:"https://images.meesho.com/images/products/504941625/pso1t_512.avif?width=512",details:{fabric:"Silk",work:"Sequins",occasion:"Haldhi",color:"Yellow",origin:"India"}},
+{id:12,name:"Groom Function Blazer",price:2345,type:"groom",img:"https://images.meesho.com/images/products/599196484/inmya_512.avif?width=512",details:{fabric:"Silk Blend",work:"Formal",occasion:"Reception",color:"Blue and Black",origin:"India"}},
+{id:13,name:"Bridal Function Set",price:1800,type:"bride",img:"https://images.meesho.com/images/products/649566132/rkmuv_512.avif?width=512",details:{fabric:"Silk",work:"Kunthan Work",occasion:"Function",color:"Lavnander",origin:"India"}},
+{id:14,name:"Groom Wedding Coat",price:4999,type:"groom",img:"https://shameelkhan.com/wp-content/uploads/2025/02/02-PC-copy-450x660.jpg",details:{fabric:"Cotton Silk",work:"Printed",occasion:"Marriage",color:"Black and Gold",origin:"India"}},
+{id:15,name:"Bridal Silk Saree",price:2459,type:"bride",img:"https://images.meesho.com/images/products/468427175/us9py_512.avif?width=512",details:{fabric:"Silk",work:"Silver Zari",occasion:"Wedding",color:"Light Blue",origin:"India"}},
+{id:16,name:"Groom Ethnic Kurta",price:1799,type:"groom",img:"https://images.meesho.com/images/products/656014174/xqphu_512.avif?width=360",details:{fabric:"Cotton",work:"Thread Work",occasion:"Function",color:"Green",origin:"India"}},
+{id:17,name:"Bridal Work Saree",price:2500,type:"bride",img:"https://images.meesho.com/images/products/508905668/m3joh_512.avif?width=512",details:{fabric:"Net",work:"Stone & Zari",occasion:"Function",color:"Pink",origin:"India"}},
+{id:18,name:"Groom Haldhi Set",price:3000,type:"groom",img:"https://images.meesho.com/images/products/655915960/qqfj1_512.avif?width=512",details:{fabric:"Cotton",work:"Simple",occasion:"Function",color:"Yellow",origin:"India"}},
+{id:19,name:"Bridal Party Saree",price:2999,type:"bride",img:"https://images.meesho.com/images/products/449258756/gdoke_512.avif?width=512",details:{fabric:"Georgette",work:"Sequin",occasion:"Party",color:"Green",origin:"India"}},
+{id:20,name:"Groom Wedding Dhoti",price:2699,type:"groom",img:"https://ramrajcotton.in/cdn/shop/files/241019_Ramraj_e-com11905.jpg?v=1738043093&width=1080",details:{fabric:"Silk Blend",work:"Thread Work",occasion:"Wedding",color:"Cream",origin:"India"}},
+{id:21,name:"Bridal Silk Saree Classic",price:3299,type:"bride",img:"https://images.meesho.com/images/products/534368211/qeckx_512.avif?width=512",details:{fabric:"Silk",work:"Zari",occasion:"Marriage",color:"Yellow",origin:"India"}},
+{id:22,name:"Groom Royal Kurta",price:6999,type:"groom",img:"https://images.meesho.com/images/products/679372980/zwef4_512.avif?width=512",details:{fabric:"Cotton Silk",work:"Embroidery",occasion:"Function",color:"Blue",origin:"India"}},
+{id:23,name:"Bridal Sudithar Designer",price:2050,type:"bride",img:"https://images.meesho.com/images/products/672964557/j5xsu_512.avif?width=512",details:{fabric:"Net Silk",work:"Zari Work",occasion:"Function",color:"Green",origin:"India"}},
+{id:24,name:"Groom Indo Western Shirt",price:3889,type:"groom",img:"https://images.meesho.com/images/products/634072293/ywr2r_512.avif?width=512",details:{fabric:"Silk Blend",work:"Designer Stitch",occasion:"Reception",color:"Green",origin:"India"}},
+{id:25,name:"Bridal Banarasi Saree",price:5899,type:"bride",img:"https://images.meesho.com/images/products/509421459/r4wk7_512.avif?width=512",details:{fabric:"Silk",work:"Zari Work",occasion:"Marriage",color:"Red",origin:"India"}}
+];
+
+/* RENDER GRID */
+function render(list){
+ grid.innerHTML="";
+ list.forEach(d=>{
+  grid.innerHTML+=`
+   <div class="card">
+    <img src="${d.img}" onclick='openDetails(${JSON.stringify(d)})'>
+    <div class="name">${d.name}</div>
+    <div class="price">₹${d.price}</div>
+   </div>`;
+ });
+}
+
+/* FILTER LOGIC */
+let currentFilter="all";
+function filterType(type,btn){
+ currentFilter=type;
+ document.querySelectorAll(".filters button").forEach(b=>b.classList.remove("active"));
+ btn.classList.add("active");
+ applyFilter();
+}
+function applyFilter(){
+ const q = searchInput.value.toLowerCase();
+ const filtered = dresses.filter(d=>{
+  const typeMatch = currentFilter==="all" || d.type===currentFilter;
+  const searchMatch = d.name.toLowerCase().includes(q);
+  return typeMatch && searchMatch;
+ });
+ render(filtered);
+}
+searchInput.oninput=applyFilter;
+
+/* DETAILS PANEL */
+function openDetails(d){
+ selectedDress=d;selectedSize="";
+ reminder.style.display="none";
+ details.classList.add("show");
+ dImg.src=d.img;
+ dName.innerText=d.name;
+ dPrice.innerText=d.price;
+ sizesDiv.innerHTML="";
+ ["S","M","L","XL","XXL","Free Size"].forEach(s=>{
+  sizesDiv.innerHTML+=`<button onclick="selectSize(this)">${s}</button>`;
+ });
+ document.getElementById("detailsText").innerHTML =
+ `<b>${d.name}</b><br>
+ Fabric: ${d.details.fabric}<br>
+ Work: ${d.details.work}<br>
+ Occasion: ${d.details.occasion}<br>
+ Color: ${d.details.color}<br>
+ Country of Origin: ${d.details.origin}`;
+}
+function closeDetails(){details.classList.remove("show")}
+
+/* SIZE SELECT */
+function selectSize(btn){
+ document.querySelectorAll(".sizes button").forEach(b=>b.classList.remove("active"));
+ btn.classList.add("active");
+ selectedSize=btn.innerText;
+ reminder.style.display="none";
+}
+
+/* ADD TO CART & BUY NOW */
+function addToCart(){
+ if(!selectedSize){reminder.style.display="block";return;}
+ let cart=JSON.parse(localStorage.getItem("cart"))||[];
+ cart.push({...selectedDress,size:selectedSize});
+ localStorage.setItem("cart",JSON.stringify(cart));
+ location.href="cart.html"; // redirect to cart page
+}
+function buyNow(){
+ if(!selectedSize){reminder.style.display="block";return;}
+ location.href="booking.html";
+}
+
+/* CART COUNT */
+function updateCart(){
+ let cart=JSON.parse(localStorage.getItem("cart"))||[];
+ document.getElementById("cartCount").innerText=cart.length;
+}
+updateCart();
+
+/* SERVICES */
+function toggleServices(){document.getElementById("servicesMenu").classList.toggle("show")}
+function selectService(el){
+ document.querySelectorAll("#servicesMenu div").forEach(d=>d.classList.remove("active"));
+ el.classList.add("active");
+ location.href = el.getAttribute("data-link");
+}
+
+/* INITIAL RENDER */
+applyFilter();
+</script>
+</body>
+</html>

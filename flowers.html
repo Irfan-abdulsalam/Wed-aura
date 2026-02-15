@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Flowers | Wed Aura</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{background:#f9f5f9}
+
+/* NAVBAR */
+nav{
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:#fff;
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.nav-left{font-size:22px;font-weight:900}
+.nav-right{display:flex;gap:25px;align-items:center}
+.nav-right a{
+  color:white;
+  text-decoration:none;
+  font-weight:700;
+  cursor:pointer;
+  position:relative;
+}
+
+/* CART BADGE */
+.badge{
+  position:absolute;
+  top:-8px;
+  right:-12px;
+  background:red;
+  color:#fff;
+  font-size:11px;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+}
+
+/* SERVICES */
+.services-box{
+  display:none;
+  background:#fff;
+  padding:15px;
+  position:absolute;
+  top:65px;
+  right:30px;
+  width:280px;
+  border-radius:12px;
+  box-shadow:0 0 20px rgba(0,0,0,.2);
+  z-index:99;
+}
+.services-box h4{
+  text-align:center;
+  color:#800080;
+  margin-bottom:10px;
+}
+.service-item{
+  padding:8px;
+  border-radius:8px;
+  cursor:pointer;
+}
+.service-item:hover{
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:#fff;
+}
+
+/* PAGE */
+.container{display:flex;gap:20px;padding:20px}
+.left{flex:2}
+
+/* SECTION TITLE */
+.section-title{
+  font-size:22px;
+  font-weight:800;
+  color:#800080;
+  margin:15px 0 10px;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+.card{
+  background:#fff;
+  border-radius:14px;
+  padding:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,.1);
+}
+.card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:12px;
+  cursor:pointer;
+}
+.price-tag{
+  margin-top:6px;
+  font-weight:700;
+  color:#800080;
+}
+.studio{
+  font-size:13px;
+  color:#444;
+}
+
+/* DETAILS */
+.details{
+  flex:1;
+  background:#fff;
+  border-radius:15px;
+  padding:15px;
+  box-shadow:0 0 20px rgba(0,0,0,.2);
+  display:none;
+  position:relative;
+}
+.close{
+  position:absolute;
+  top:10px;
+  right:12px;
+  cursor:pointer;
+  font-weight:bold;
+}
+.details img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:12px;
+}
+.sub-imgs{
+  display:flex;
+  gap:10px;
+  margin:10px 0;
+}
+.sub-imgs img{
+  width:70px;
+  height:70px;
+  border-radius:10px;
+  cursor:pointer;
+  object-fit:cover;
+  border:2px solid #ddd;
+}
+.box{
+  background:#f2e6f7;
+  padding:10px;
+  border-radius:10px;
+  margin:8px 0;
+}
+.bold-price{
+  font-size:18px;
+  font-weight:900;
+  color:#800080;
+}
+.stars span{
+  font-size:22px;
+  cursor:pointer;
+  color:#ccc;
+}
+.stars span.active{color:gold}
+.btn{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+  margin-top:8px;
+}
+/* ONLY CART ICON DARK */
+.nav-right a[href="cart.html"]{
+  color:#111;
+  font-size:22px;
+}
+
+/* CART COUNT – WHITE BUBBLE */
+.nav-right a[href="cart.html"] .badge{
+  background:#fff;
+  color:#000;
+  font-weight:800;
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="nav-left">WED AURA - Flowers</div>
+  <div class="nav-right">
+    <a href="index.html">Home</a>
+    <a onclick="toggleServices()">Services ▼</a>
+    <a href="cart.html">🛒 <span class="badge" id="cartCount">0</span></a>
+  </div>
+</nav>
+
+<!-- SERVICES DROPDOWN (ALL SERVICES) -->
+<div class="services-box" id="services">
+  <h4>OUR SERVICES</h4>
+  <div class="service-item" onclick="go('dresse.html')">👗 Dresses</div>
+  <div class="service-item" onclick="go('accessories.html')">💍 Accessories</div>
+  <div class="service-item" onclick="go('decoration.html')">🎀 Decorations</div>
+  <div class="service-item" onclick="go('flowers.html')">🌸 Flowers</div>
+  <div class="service-item" onclick="go('halls.html')">🏰 Halls</div>
+  <div class="service-item" onclick="go('makeup.html')">💄 Makeup</div>
+  <div class="service-item" onclick="go('mehandi.html')">✋ Mehandhi</div>
+  <div class="service-item" onclick="go('catering.html')">🍽 Catering</div>
+  <div class="service-item" onclick="go('invitation.html')">💌 Invitations</div>
+  <div class="service-item" onclick="go('photographer.html')">📸 Photographer</div>
+  <div class="service-item" onclick="go('booking.html')">📅 Booking / Payment</div>
+</div>
+
+<div class="container">
+
+<!-- LEFT -->
+<div class="left">
+
+  <div class="section-title">Bride / Groom Garlands</div>
+  <div class="grid" id="garlands"></div>
+
+  <div class="section-title">Bride Hair Bun Flowers</div>
+  <div class="grid" id="bun"></div>
+
+  <div class="section-title">Haldi Flower Accessories</div>
+  <div class="grid" id="haldi"></div>
+
+</div>
+
+<!-- DETAILS -->
+<div class="details" id="details">
+  <div class="close" onclick="details.style.display='none'">✖</div>
+
+  <img id="mainImg">
+  <div class="sub-imgs" id="subs"></div>
+
+  <div class="bold-price">🌸 Price : ₹<span id="price"></span></div>
+
+ <div class="box">
+  🏢 Artist : <span id="artist"></span> <br>
+  📞 Phone : <span id="phone"></span>
+</div>
+
+<div class="box">
+  ⭐ Experience : <span id="exp"></span> <br>
+  🌼 Other Services : Custom Floral Design, Mandap Setup, Car Decoration, Reception Backdrop
+</div>
+
+
+  <div class="stars">
+    <span onclick="rate(1)">★</span>
+    <span onclick="rate(2)">★</span>
+    <span onclick="rate(3)">★</span>
+    <span onclick="rate(4)">★</span>
+    <span onclick="rate(5)">★</span>
+  </div>
+
+  <button class="btn" onclick="addToCart()">🛒 Add to Cart</button>
+  <button class="btn" onclick="go('booking.html')">📅 Booking Now</button>
+</div>
+
+</div>
+
+<script>
+const garlandData=[
+ {name:"Garland 1",
+ img:"https://5.imimg.com/data5/GJ/DH/WH/SELLER-32786584/weddingmarriage-garland-3-.jpg",
+ price:1200,
+  artist:"FloraCraft Studio",
+  phone:"9894778899",
+  exp:"6 Years"
+},
+ {name:"Garland 2",
+ img:"https://i.pinimg.com/originals/6d/83/0d/6d830dfad4b5e5607530bcb872e6bb3b.jpg",
+ price:2000,
+  artist:"The Jasmine Edit",
+  phone:"93847 11220",
+  exp:"12 Years"
+  },
+ {name:"Garland 3",
+ img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKeXaBV72Yv0joDo_SgXI_tFZnkInOSspniQ&s",
+ price:1500,
+  artist:"Petal & Knot",
+  phone:"90036 55421",
+  exp:"5 Years"
+  },
+ {name:"Garland 4",
+ img:"https://getflowersdaily.com/wp-content/uploads/2025/07/Traditional-Wedding-Garland.png",
+ price:3000,
+  artist:"Blossom Theory",
+  phone:"98402 66773",
+  exp:"11 Years"
+  },
+ 
+
+];
+
+const bunData=[
+ {name:"Hair Bun 1",
+ img:"https://img.weddingbazaar.com/photos/pictures/000/655/154/new_medium/simmy_makwana.jpg?1547022491",
+ price:2500,
+  artist:"Aura Petals",
+  phone:"97890 22451",
+  exp:"15 Years"
+  },
+ {name:"Hair Bun 2",
+ img:"https://cdn.shopify.com/s/files/1/0258/2531/2848/files/bun_rev_classic_gajra.webp?v=1743135084",
+ price:1200,
+  artist:"Sacred Bloom Co.",
+  phone:"94431 88902",
+  exp:"9 Years"
+  },
+ {name:"Hair Bun 3",
+ img:"https://stylesatlife.com/wp-content/uploads/2018/02/Bun-Hairstyles-for-Wedding-5.jpg",
+ price:1800,
+  artist:"Velvet Vines",
+  phone:"93610 44728",
+  exp:"8 Years"
+  },
+ {name:"Hair Bun 4",
+ img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS43TcpijV9n80Nz_ZuvIELhn7MZbBUXF5TkQ&s",
+ price:2500,
+  artist:"Mandap Muse",
+  phone:"90927 66518",
+  exp:"6 Years"
+  },
+
+];
+
+const haldiData=[
+ {name:"Haldi 1",
+ img:"https://assets.giftalove.com/resources/common/giftimages/largeimage/floral-haldi-jewellery-set-for-bride_1.jpg",
+ price:1200,
+  artist:"Urban Pookkal",
+  phone:"88703 44126",
+  exp:"6 Years"
+  },
+ {name:"Haldi 2",
+ img:"https://5.imimg.com/data5/SELLER/Default/2022/2/VE/AT/WE/145771796/new-product-500x500.jpeg",
+ price:1800,
+  artist:"Floral Sutra",
+  phone:"97911 66820",
+  exp:"4 Years"
+  },
+ {name:"Haldi 3",
+ img:"https://lamansh.in/cdn/shop/products/lamansh-baby-shower-1-necklace-2-earrings-1-maangtika-set-yellow-white-lamansh-floral-mogra-haldi-jewellery-set-artificial-flower-jewelry-set-28349188309053.jpg?v=1653349481",
+ price:1500,
+  artist:"The Wedding Botanist",
+  phone:"96009 55234",
+  exp:"12 Years"
+  },
+ {name:"Haldi 4",
+ img:"https://images.meesho.com/images/products/471726866/nacra_512.jpg",
+ price:1300,
+  artist:"Malli Magic",
+  phone:"95005 77361",
+  exp:"7 Years"
+  },
+
+];
+
+let current;
+
+function render(data,id){
+ document.getElementById(id).innerHTML="";
+ data.forEach(p=>{
+  document.getElementById(id).innerHTML+=`
+   <div class="card">
+    <img src="${p.img}" onclick='openDetails(${JSON.stringify(p)})'>
+    <div class="price-tag">₹${p.price}</div>
+    <div class="studio">🏢 ${p.artist || "Royal Flower Decor"}</div>
+   </div>`;
+ });
+}
+
+
+render(garlandData,"garlands");
+render(bunData,"bun");
+render(haldiData,"haldi");
+
+function openDetails(p){
+ current=p;
+ details.style.display="block";
+ mainImg.src=p.img;
+ price.innerText=p.price;
+
+ document.getElementById("artist").innerText = p.artist || "Royal Flower Decor";
+ document.getElementById("phone").innerText  = p.phone  || "9876543210";
+ document.getElementById("exp").innerText    = p.exp    || "7+ Years";
+
+ subs.innerHTML=`<img src="${p.img}" onclick="mainImg.src='${p.img}'">`;
+}
+
+
+
+function addToCart(){
+ let cart=JSON.parse(localStorage.getItem("cart"))||[];
+ cart.push({
+  category:"Flowers",
+  name:current.name,
+  price:current.price,
+  img:current.img
+ });
+ localStorage.setItem("cart",JSON.stringify(cart));
+ cartCount.innerText=cart.length;
+ location.href="cart.html";
+}
+
+cartCount.innerText=(JSON.parse(localStorage.getItem("cart"))||[]).length;
+
+function toggleServices(){
+ services.style.display=services.style.display==="block"?"none":"block";
+}
+function go(p){location.href=p;}
+function rate(n){
+ document.querySelectorAll(".stars span").forEach((s,i)=>{
+  s.classList.toggle("active",i<n);
+ });
+}
+</script>
+
+</body>
+</html>

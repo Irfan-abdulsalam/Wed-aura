@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Cart | Wed Aura</title>
+
+<style>
+body{
+  font-family:Poppins;
+  background:#f9f5f9;
+  margin:0;
+  padding-bottom:140px;
+}
+
+/* ITEM */
+.item{
+  background:#fff;
+  margin:15px;
+  padding:15px;
+  border-radius:16px;
+  display:flex;
+  gap:15px;
+  align-items:flex-start;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.item img{
+  width:90px;
+  height:120px;
+  border-radius:10px;
+  object-fit:cover;
+}
+
+.info{
+  flex:1;
+  font-size:14px;
+}
+
+.info b{
+  font-size:16px;
+  color:#330033;
+}
+
+.category{
+  font-size:13px;
+  color:#800080;
+  font-weight:bold;
+}
+
+.price{
+  color:#c9184a;
+  font-weight:bold;
+}
+
+.qty{
+  margin-top:5px;
+}
+
+.remove{
+  color:red;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* TOTAL */
+.cart-total{
+  position:fixed;
+  bottom:85px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#fff;
+  width:90%;
+  max-width:420px;
+  padding:15px;
+  border-radius:16px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.15);
+  text-align:center;
+  font-size:18px;
+  font-weight:bold;
+  color:#800080;
+}
+
+/* BUY */
+.buy{
+  position:fixed;
+  bottom:20px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:15px 55px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:#fff;
+  font-weight:700;
+  letter-spacing:1px;
+  cursor:pointer;
+  font-size:16px;
+}
+.buy:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+}
+
+.empty{
+  text-align:center;
+  margin-top:50px;
+  color:#777;
+}
+</style>
+</head>
+
+<body>
+
+<h2 style="padding:20px">🛒 My Cart</h2>
+
+<div id="cart"></div>
+
+<div class="cart-total">
+Total Amount: ₹<span id="total">0</span>
+</div>
+
+<button class="buy" onclick="checkout()">BUY NOW</button>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+const box = document.getElementById("cart");
+const totalBox = document.getElementById("total");
+const buyBtn = document.querySelector(".buy");
+
+/* RENDER CART */
+function render(){
+  box.innerHTML="";
+  let total = 0;
+
+  if(cart.length === 0){
+    box.innerHTML = `<p class="empty">Your cart is empty 😕</p>`;
+    totalBox.innerText = "0";
+    buyBtn.disabled = true;
+    return;
+  }
+
+  buyBtn.disabled = false;
+
+  cart.forEach((d,i)=>{
+    let qty = d.qty || 1;
+    let sub = d.price * qty;
+    total += sub;
+
+    box.innerHTML += `
+    <div class="item">
+      <img src="${d.img || 'images/no-image.png'}">
+      <div class="info">
+        <div class="category">${d.category || 'General'}</div>
+        <b>${d.name}</b><br>
+        <span class="price">₹${d.price}</span><br>
+        <div class="qty">Qty: ${qty}</div>
+        ${d.size ? "Size: "+d.size : ""}
+        <div>Subtotal: ₹${sub}</div>
+      </div>
+      <div class="remove" onclick="removeItem(${i})">✖</div>
+    </div>`;
+  });
+
+  totalBox.innerText = total;
+}
+
+/* REMOVE */
+function removeItem(i){
+  cart.splice(i,1);
+  localStorage.setItem("cart",JSON.stringify(cart));
+  render();
+}
+
+/* CHECKOUT */
+function checkout(){
+  let services = cart.map(item => ({
+    category : item.category || "General",
+    name     : item.name,
+    price    : Number(item.price),
+    qty      : item.qty || 1,
+    size     : item.size || "",
+    img      : item.img || ""
+  }));
+
+  localStorage.setItem("selectedServices", JSON.stringify(services));
+  window.location.href = "booking.html";
+}
+
+render();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Payment | Wed Aura</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:Poppins,sans-serif;
+  background:#f4f0f5;
+}
+
+header{
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  font-size:26px;
+  font-weight:bold;
+}
+
+.payment-container{
+  max-width:650px;
+  background:#fff;
+  margin:35px auto;
+  padding:28px;
+  border-radius:18px;
+  box-shadow:0 0 18px rgba(0,0,0,0.2);
+}
+
+.summary-box{
+  border:2px solid #800080;
+  border-radius:14px;
+  padding:20px;
+}
+
+.summary-box h2{
+  text-align:center;
+  color:#800080;
+  margin-bottom:15px;
+}
+
+/* SERVICE ITEMS */
+.pay-item{
+  background:#faf0fa;
+  padding:12px;
+  border-radius:10px;
+  margin-bottom:10px;
+  font-size:15px;
+}
+
+.pay-item b{
+  color:#4a004a;
+}
+
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  margin:8px 0;
+  font-size:16px;
+}
+
+.total{
+  font-size:20px;
+  color:#ff0000;
+  font-weight:bold;
+  text-align:center;
+  margin-top:15px;
+}
+
+hr{margin:18px 0}
+
+/* BUTTON */
+.pay-btn{
+  width:100%;
+  padding:16px;
+  background:#ff0000;
+  color:#fff;
+  border:none;
+  border-radius:12px;
+  font-size:20px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.pay-btn:hover{background:#cc0000}
+
+/* SUCCESS */
+.success-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.7);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+.success-box{
+  background:#fff;
+  padding:40px;
+  border-radius:20px;
+  text-align:center;
+  animation:pop 0.4s ease;
+}
+
+.check{
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:#fff;
+  font-size:50px;
+  line-height:80px;
+  margin:0 auto 15px;
+}
+
+@keyframes pop{
+  from{transform:scale(0.6);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+</style>
+</head>
+
+<body>
+
+<header>Payment</header>
+
+<div class="payment-container">
+
+<div class="summary-box">
+<h2>Booking Summary</h2>
+
+<!-- SERVICES -->
+<div id="paymentServices"></div>
+
+<div class="total">
+Total Amount: ₹<span id="payTotal">0</span>
+</div>
+
+<hr>
+
+<!-- CUSTOMER -->
+<div class="summary-row">Customer <b id="custName"></b></div>
+<div class="summary-row">Phone <b id="phone"></b></div>
+<div class="summary-row">Wedding Date <b id="date"></b></div>
+<div class="summary-row">Address <b id="address"></b></div>
+
+</div>
+
+<br>
+<button class="pay-btn" onclick="paymentSuccess()">Pay Now</button>
+
+</div>
+
+<!-- SUCCESS -->
+<div class="success-overlay" id="successOverlay">
+<div class="success-box">
+  <div class="check">✓</div>
+  <h2>Payment Successful</h2>
+  <p>Your wedding booking is confirmed 💍</p>
+</div>
+</div>
+
+<script>
+/* ===== LOAD SERVICES ===== */
+let services =
+  JSON.parse(localStorage.getItem("selectedServices")) || [];
+
+let serviceBox = document.getElementById("paymentServices");
+let totalBox = document.getElementById("payTotal");
+
+let total = 0;
+
+if(services.length === 0){
+  serviceBox.innerHTML = "<p>No services selected</p>";
+}else{
+  services.forEach(item=>{
+    let sub = item.price * item.qty;
+    total += sub;
+
+    serviceBox.innerHTML += `
+      <div class="pay-item">
+        <b>${item.category}</b> – ${item.name}<br>
+        Price: ₹${item.price} × ${item.qty}<br>
+        ${item.size ? "Size: "+item.size+"<br>" : ""}
+        <b>Subtotal: ₹${sub}</b>
+      </div>
+    `;
+  });
+}
+
+totalBox.innerText = total;
+
+/* ===== CUSTOMER DETAILS ===== */
+document.getElementById("custName").innerText =
+  localStorage.getItem("customerName") || "-";
+
+document.getElementById("phone").innerText =
+  localStorage.getItem("phone") || "-";
+
+document.getElementById("date").innerText =
+  localStorage.getItem("eventDate") || "-";
+
+document.getElementById("address").innerText =
+  localStorage.getItem("address") || "-";
+
+/* ===== PAYMENT SUCCESS ===== */
+function paymentSuccess(){
+  document.getElementById("successOverlay").style.display="flex";
+
+  setTimeout(()=>{
+    localStorage.clear();
+    window.location.href="index.html";
+  },2500);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Invitations | Wed Aura</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{background:#f9f5f9}
+
+/* NAVBAR */
+nav{
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:#fff;
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.nav-left{font-size:22px;font-weight:900}
+.nav-right{display:flex;gap:25px;align-items:center}
+.nav-right a{
+  color:white;
+  text-decoration:none;
+  font-weight:700;
+  cursor:pointer;
+  position:relative;
+}
+
+/* CART BADGE */
+.badge{
+  position:absolute;
+  top:-8px;
+  right:-12px;
+  background:red;
+  color:#fff;
+  font-size:11px;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+}
+
+/* SERVICE DROPDOWN BUTTON */
+.service-btn{
+  background:rgba(255,255,255,.25);
+  padding:6px 14px;
+  border-radius:20px;
+}
+
+/* SERVICES DROPDOWN */
+.services-box{
+  display:none;
+  background:#fff;
+  padding:15px;
+  position:absolute;
+  top:65px;
+  right:30px;
+  width:280px;
+  border-radius:12px;
+  box-shadow:0 0 20px rgba(0,0,0,.2);
+  z-index:99;
+}
+.services-box h4{
+  text-align:center;
+  color:#800080;
+  margin-bottom:10px;
+}
+.service-item{
+  padding:8px;
+  border-radius:8px;
+  cursor:pointer;
+}
+.service-item:hover{
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:#fff;
+}
+
+/* PAGE */
+.container{display:flex;gap:20px;padding:20px}
+
+/* GRID */
+.grid{
+  flex:2;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+.card{
+  background:#fff;
+  border-radius:14px;
+  padding:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,.1);
+  position:relative;
+}
+.card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+
+/* ONLY CART ICON DARK */
+.nav-right a[href="cart.html"]{
+  color:#111;
+  font-size:22px;
+}
+
+/* CART COUNT – WHITE BUBBLE */
+.nav-right a[href="cart.html"] .badge{
+  background:#fff;
+  color:#000;
+  font-weight:800;
+}
+.like{
+  position:absolute;
+  top:12px;
+  right:12px;
+  font-size:22px;
+  cursor:pointer;
+  color:#ccc;
+}
+.like.active{color:red}
+.price-tag{
+  text-align:center;
+  font-weight:700;
+  margin-top:6px;
+  color:#800080;
+}
+
+/* DETAILS */
+.details{
+  flex:1;
+  background:#fff;
+  border-radius:15px;
+  padding:15px;
+  box-shadow:0 0 20px rgba(0,0,0,.2);
+  display:none;
+  position:relative;
+}
+.close{
+  position:absolute;
+  top:10px;
+  right:12px;
+  cursor:pointer;
+  font-weight:bold;
+}
+.details img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+  border-radius:12px;
+}
+.box{
+  background:#f2e6f7;
+  padding:10px;
+  border-radius:10px;
+  margin:8px 0;
+}
+input{
+  width:100%;
+  padding:8px;
+  border-radius:20px;
+  border:1px solid #ccc;
+}
+.total{font-weight:800;margin:6px 0}
+
+/* STARS */
+.stars span{
+  font-size:22px;
+  cursor:pointer;
+  color:#ccc;
+}
+.stars span.active{color:gold}
+
+.btn{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="nav-left">WED AURA - Invitations</div>
+  <div class="nav-right">
+    <a href="index.html">Home</a>
+    <a class="service-btn" onclick="toggleServices()">Services ▼</a>
+    <a href="cart.html">🛒 <span class="badge" id="cartCount">0</span></a>
+  </div>
+</nav>
+
+<!-- SERVICES DROPDOWN -->
+<div class="services-box" id="services">
+  <h4>OUR SERVICES</h4>
+  <div class="service-item" onclick="go('dress.html')">👗 Dresses</div>
+  <div class="service-item" onclick="go('accessories.html')">💍 Accessories</div>
+  <div class="service-item" onclick="go('decoration.html')">🎀 Decorations</div>
+  <div class="service-item" onclick="go('flowers.html')">🌸 Flowers</div>
+  <div class="service-item" onclick="go('halls.html')">🏰 Halls</div>
+  <div class="service-item" onclick="go('makeup.html')">💄 Makeup</div>
+  <div class="service-item" onclick="go('mehandhi.html')">✋ Mehandhi</div>
+  <div class="service-item" onclick="go('catering.html')">🍽 Catering</div>
+  <div class="service-item" onclick="go('invitations.html')">💌 Invitations</div>
+  <div class="service-item" onclick="go('photographer.html')">📸 Photographer</div>
+  <div class="service-item" onclick="go('booking.html')">📅 Booking / Payment</div>
+</div>
+
+<div class="container">
+  <div class="grid" id="grid"></div>
+
+  <div class="details" id="details">
+    <div class="close" onclick="closeDetails()">✖</div>
+    <img id="dImg">
+    <div class="box">Price / Invitation : ₹<span id="price"></span></div>
+    <input type="number" id="qty" placeholder="No of Invitations" oninput="calcTotal()">
+    <div class="total">Total : ₹<span id="total">0</span></div>
+    <div class="box">⭐ Rating Percentage : 92%</div>
+    <div class="box">Other Services : Custom Print, Envelope, Express Delivery</div>
+    <div class="stars">
+      <span onclick="rate(1)">★</span>
+      <span onclick="rate(2)">★</span>
+      <span onclick="rate(3)">★</span>
+      <span onclick="rate(4)">★</span>
+      <span onclick="rate(5)">★</span>
+    </div>
+    <button class="btn" onclick="addToCart()">🛒 Add to Cart</button>
+    <br><br>
+    <button class="btn" onclick="goBooking()">📅 Booking Now</button>
+  </div>
+</div>
+
+<script>
+const grid = document.getElementById("grid");
+const details = document.getElementById("details");
+const dImg = document.getElementById("dImg");
+const price = document.getElementById("price");
+const qty = document.getElementById("qty");
+const total = document.getElementById("total");
+
+// 20 unique images + prices
+let images = [
+  {img:"https://tiimg.tistatic.com/fp/1/007/800/modern-handmade-colour-white-and-red-lamination-wedding-invitation-cards-744.jpg", price:31},
+  {img:"https://graphicsfamily.com/wp-content/uploads/edd/2020/11/Free-Golden-Wedding-Invitation-Photoshop-Template-scaled.jpg", price:32},
+  {img:"https://i.pinimg.com/736x/12/38/e3/1238e3f42c520d9946ad985d86134dd2.jpg", price:33},
+  {img:"https://i.pinimg.com/736x/a7/cd/33/a7cd3392fb80fdc64c1a8783ad8d4598.jpg", price:34},
+  {img:"https://blog.indianweddingcard.com/wp-content/uploads/2022/01/unique-wedding-cards-scaled.jpg", price:35},
+  {img:"https://swastikweddingcards.com/wp-content/uploads/304678-scaled.jpg", price:36},
+  {img:"https://content.jdmagicbox.com/quickquotes/images_main/muslim-wedding-card-design-on-acrylic-satin-802836416-vocwgm5c.jpg?impolicy=queryparam&im=Resize=(360,360),aspect=fit", price:37},
+  {img:"https://i.pinimg.com/236x/7c/3d/bd/7c3dbda6a7f597b4bcfad1ada74c66bf.jpg", price:38},
+  {img:"https://www.hamaraevent.com/uploads/blog/0935075001473840077.jpg", price:39},
+  {img:"https://cdn.shopify.com/s/files/1/0633/8330/6303/files/Front-Photo-of-Flower-Hindu-Muslim-Christian-Sikh-invitation-Cards-ATS-L4109-1-800x1067.webp?v=1762193138", price:40},
+  {img:"https://img.pikbest.com/backgrounds/20250911/elegant-wedding-invitation-card-design-with-golden-borders_11882313.jpg!w700wp", price:41},
+  {img:"https://thumbs.dreamstime.com/b/elegant-wedding-invitation-card-template-features-beautifully-designed-golden-rings-delicate-flowers-crisp-white-364321365.jpg", price:42},
+  {img:"https://png.pngtree.com/thumb_back/fh260/background/20250415/pngtree-an-elegant-wedding-invitation-card-with-a-luxurious-deep-red-image_17184889.jpg", price:43},
+  {img:"https://m.media-amazon.com/images/I/91EFpseVFZL._AC_UF1000,1000_QL80_.jpg", price:44},
+  {img:"https://thumbs.dreamstime.com/b/antique-royal-luxury-wedding-invitation-gold-beige-background-frame-place-text-lacy-foliage-made-roses-140281726.jpg", price:45},
+  {img:"https://nyomplanet.com/blogImages/featured/Beyond-the-Envelope-Why-Your-Wedding-Invitation-is-More-Than-Just-a-Card.jpg", price:46},
+  {img:"https://kingofcards.in/cdn/shop/files/2-KNK50261-Card.png?v=1766415446&width=1500", price:47},
+  {img:"https://static.vecteezy.com/system/resources/thumbnails/003/365/412/small/luxury-wedding-invitation-card-with-golden-frame-and-rose-bouquet-free-vector.jpg", price:48},
+  {img:"https://i.etsystatic.com/41864742/r/il/780473/6970759826/il_570xN.6970759826_2zox.jpg", price:49},
+  {img:"https://vishakhacollections.com/cdn/shop/files/VC-EJ-5142-2.jpg?v=1762081373&width=1445", price:50}
+];
+
+let unit=0, currentImg="", currentIndex=0;
+
+// build grid with like
+images.forEach((d,index)=>{
+  grid.innerHTML += `
+    <div class="card">
+      <span class="like" id="like${index}" onclick="toggleLike(${index})">❤</span>
+      <img src="${d.img}" onclick="openDetails(${index})">
+      <div class="price-tag">₹${d.price} / Invitation</div>
+    </div>
+  `;
+
+  // restore like from localStorage
+  let liked = JSON.parse(localStorage.getItem("likes")) || [];
+  if(liked[index]) document.getElementById(`like${index}`).classList.add('active');
+});
+
+function toggleLike(idx){
+  const span = document.getElementById(`like${idx}`);
+  span.classList.toggle('active');
+
+  let liked = JSON.parse(localStorage.getItem("likes")) || [];
+  liked[idx] = span.classList.contains('active');
+  localStorage.setItem("likes", JSON.stringify(liked));
+}
+
+function openDetails(idx){
+  currentIndex = idx;
+  let d = images[idx];
+  details.style.display="block";
+  dImg.src = d.img;
+  currentImg = d.img;
+  unit = d.price;
+  price.innerText = d.price;
+  qty.value="";
+  total.innerText = 0;
+}
+
+function closeDetails(){ details.style.display="none"; }
+function calcTotal(){ total.innerText = (qty.value||0)*unit; }
+
+function rate(n){
+  document.querySelectorAll(".stars span").forEach((s,i)=>{
+    s.classList.toggle("active",i<n);
+  });
+}
+
+function addToCart(){
+  let q = Number(qty.value);
+  if(!q){ alert("Quantity enter pannunga"); return; }
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart.push({
+    category:"Invitations",
+    name:"Wedding Invitation",
+    price:unit,
+    qty:q,
+    img:currentImg
+  });
+  localStorage.setItem("cart",JSON.stringify(cart));
+  updateCartCount();
+  window.location.href="cart.html";
+}
+
+function toggleServices(){
+  services.style.display = services.style.display==="block"?"none":"block";
+}
+function go(p){ window.location.href = p }
+
+function goBooking(){ window.location.href="booking.html"; }
+
+function updateCartCount(){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cartCount.innerText = cart.length;
+}
+updateCartCount();
+</script>
+
+</body>
+</html>

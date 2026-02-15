@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Wed Aura | Wedding Planner</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  background:#f9f5f9;
+}
+
+/* ================= NAVBAR ================= */
+nav{
+  position:fixed;
+  width:100%;
+  top:0;
+  z-index:100;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 40px;
+  background:linear-gradient(90deg,#800080,#ff0000);
+}
+
+.nav-left{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.nav-left img{
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  background:transparent;
+  mix-blend-mode:screen;
+}
+
+.nav-left span{
+  font-size:26px;
+  font-weight:900;
+  color:white;
+}
+
+nav ul{
+  list-style:none;
+  display:flex;
+  gap:22px;
+  align-items:center;
+}
+
+nav ul li a{
+  color:white;
+  text-decoration:none;
+  font-size:15px;
+  padding:8px 16px;
+  border-radius:20px;
+}
+
+nav ul li a:hover{
+  background:rgba(255,255,255,0.25);
+}
+
+.login-btn{
+  background:white;
+  color:#800080 !important;
+  font-weight:bold;
+}
+
+/* ================= HERO ================= */
+.hero{
+  height:100vh;
+  background:
+    linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)),
+    url("https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=1600&q=80");
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  align-items:center;
+  padding-left:70px;
+  padding-top:120px;
+}
+
+.hero-content{
+  max-width:520px;
+  color:white;
+}
+
+.hero-content h1{
+  font-size:48px;
+  font-weight:900;
+  margin-bottom:20px;
+}
+
+.hero-content p{
+  font-size:18px;
+  margin-bottom:30px;
+}
+
+.hero-btn{
+  padding:14px 32px;
+  background: linear-gradient(90deg,#800080,#ff0000);
+  color:white;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.hero-btn:hover{
+  opacity:0.9;
+}
+
+/* ================= SERVICES CARD ================= */
+.services-card{
+  position:absolute;
+  right:50px;
+  top:140px;
+  width:300px;
+  background:white;
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 0 30px rgba(0,0,0,0.25);
+  display:none;
+}
+
+.services-card h3{
+  text-align:center;
+  margin-bottom:20px;
+  color:#330033;
+}
+
+.service-item{
+  padding:10px;
+  border-radius:10px;
+  margin-bottom:10px;
+  background:#f5eef6;
+  text-align:center;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.service-item:hover{
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:white;
+}
+
+/* ================= FOOTER ================= */
+footer{
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:white;
+  text-align:center;
+  padding:15px;
+}
+</style>
+
+<script>
+function toggleServices(){
+  const box = document.getElementById("servicesBox");
+  box.style.display = box.style.display === "block" ? "none" : "block";
+}
+
+/* ===== ONLY NEW FUNCTION (SERVICE LOGIN CHECK) ===== */
+function goToService(page){
+  if(localStorage.getItem("loggedIn") === "true"){
+    window.location.href = page;
+  }else{
+    window.location.href = "login.html";
+  }
+}
+</script>
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav>
+  <div class="nav-left">
+    <img src="C:\Users\Irfan\Downloads\website\images\logo1.png" alt="Wed Aura Logo">
+    <span>WED AURA</span>
+  </div>
+
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="dashboard.html">Dashboard</a></li>
+    <li><a href="#" onclick="toggleServices()">Services</a></li>
+    <li><a href="booking.html">Booking</a></li>
+    <li><a href="payment.html">Payment</a></li>
+    <li>
+      <a href="login.html" class="login-btn" id="loginBtn">Login</a>
+    </li>
+  </ul>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Design Your Dream Wedding</h1>
+    <p>Premium planning with elegance and luxury</p>
+    <button class="hero-btn" id="heroLoginBtn">Login</button>
+  </div>
+
+  <!-- ================= SERVICES ================= -->
+  <div class="services-card" id="servicesBox">
+    <h3>Our Services</h3>
+
+    <div class="service-item" onclick="goToService('dress.html')">Dresses</div>
+    <div class="service-item" onclick="goToService('accessories.html')">Accessories</div>
+    <div class="service-item" onclick="goToService('decoration.html')">Decoration</div>
+    <div class="service-item" onclick="goToService('flowers.html')">Flowers</div>
+    <div class="service-item" onclick="goToService('halls.html')">Halls</div>
+    <div class="service-item" onclick="goToService('makeup.html')">Makeup</div>
+    <div class="service-item" onclick="goToService('mehandhi.html')">Mehandhi</div>
+    <div class="service-item" onclick="goToService('catering.html')">Catering</div>
+    <div class="service-item" onclick="goToService('invitation.html')">Invitation</div>
+    <div class="service-item" onclick="goToService('photographer.html')">Photographer</div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Wed Aura | All Rights Reserved
+</footer>
+
+<!-- ================= LOGIN / LOGOUT SYNC LOGIC ================= -->
+<script>
+const loginBtn = document.getElementById("loginBtn");
+const heroBtn = document.getElementById("heroLoginBtn");
+
+function updateLoginButtons(){
+  if(localStorage.getItem("loggedIn") === "true"){
+    heroBtn.innerText = "Logged Out";
+    loginBtn.innerText = "Logged Out";
+    loginBtn.href = "#";
+  }else{
+    heroBtn.innerText = "Login";
+    loginBtn.innerText = "Login";
+    loginBtn.href = "login.html";
+  }
+}
+
+updateLoginButtons();
+
+heroBtn.onclick = function(){
+  if(localStorage.getItem("loggedIn") === "true"){
+    localStorage.removeItem("loggedIn");
+    alert("Logged out successfully");
+    updateLoginButtons();
+  }else{
+    window.location.href = "login.html";
+  }
+}
+
+loginBtn.onclick = function(e){
+  if(localStorage.getItem("loggedIn") === "true"){
+    e.preventDefault();
+    localStorage.removeItem("loggedIn");
+    alert("Logged out successfully");
+    updateLoginButtons();
+  }
+}
+</script>
+
+</body>
+</html>

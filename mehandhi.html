@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mehandhi | Wed Aura</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{background:#f9f5f9}
+
+/* NAVBAR */
+nav{
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:#fff;
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.nav-left{font-size:22px;font-weight:900}
+.nav-right{display:flex;gap:25px;align-items:center}
+.nav-right a{
+  color:white;
+  text-decoration:none;
+  font-weight:700;
+  cursor:pointer;
+  position:relative;
+}
+
+/* CART BADGE */
+.badge{
+  position:absolute;
+  top:-8px;
+  right:-12px;
+  background:red;
+  color:#fff;
+  font-size:11px;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+}
+
+
+/* SERVICES */
+.services-box{
+  display:none;
+  background:#fff;
+  padding:15px;
+  position:absolute;
+  top:65px;
+  right:30px;
+  width:280px;
+  border-radius:12px;
+  box-shadow:0 0 20px rgba(0,0,0,.2);
+  z-index:99;
+}
+.services-box h4{
+  text-align:center;
+  color:#800080;
+  margin-bottom:10px;
+}
+.service-item{
+  padding:8px;
+  border-radius:8px;
+  cursor:pointer;
+}
+.service-item:hover{
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:#fff;
+}
+
+/* PAGE */
+.container{display:flex;gap:20px;padding:20px}
+
+/* GRID */
+.grid{
+  flex:2;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+.card{
+  background:#fff;
+  border-radius:14px;
+  padding:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,.1);
+}
+.card img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:12px;
+  cursor:pointer;
+}
+.price-tag{
+  margin-top:6px;
+  font-weight:700;
+  color:#800080;
+}
+.studio{
+  font-size:13px;
+  margin-top:3px;
+  color:#444;
+}
+
+/* DETAILS */
+.details{
+  flex:1;
+  background:#fff;
+  border-radius:15px;
+  padding:15px;
+  box-shadow:0 0 20px rgba(0,0,0,.2);
+  display:none;
+  position:relative;
+}
+.close{
+  position:absolute;
+  top:10px;
+  right:12px;
+  cursor:pointer;
+  font-weight:bold;
+}
+.details img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:12px;
+}
+
+.sub-imgs{
+  display:flex;
+  gap:10px;
+  margin:10px 0;
+}
+.sub-imgs img{
+  width:70px;
+  height:70px;
+  border-radius:10px;
+  cursor:pointer;
+  object-fit:cover;
+  border:2px solid #ddd;
+}
+
+.box{
+  background:#f2e6f7;
+  padding:10px;
+  border-radius:10px;
+  margin:8px 0;
+}
+
+.bold-price{
+  font-size:18px;
+  font-weight:900;
+  color:#800080;
+}
+
+.stars span{
+  font-size:22px;
+  cursor:pointer;
+  color:#ccc;
+}
+.stars span.active{color:gold}
+
+.btn{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+  margin-top:8px;
+}
+
+/* ONLY CART ICON DARK */
+.nav-right a[href="cart.html"]{
+  color:#111;
+  font-size:22px;
+}
+
+/* CART COUNT – WHITE BUBBLE */
+.nav-right a[href="cart.html"] .badge{
+  background:#fff;
+  color:#000;
+  font-weight:800;
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div class="nav-left">WED AURA - Mehandhi</div>
+  <div class="nav-right">
+    <a href="index.html">Home</a>
+    <a onclick="toggleServices()">Services ▼</a>
+    <a href="cart.html">🛒 <span class="badge" id="cartCount">0</span></a>
+  </div>
+</nav>
+
+<div class="services-box" id="services">
+  <h4>OUR SERVICES</h4>
+  <div class="service-item" onclick="go('dress.html')">👗 Dresses</div>
+  <div class="service-item" onclick="go('accessories.html')">💍 Accessories</div>
+  <div class="service-item" onclick="go('decoration.html')">🎀 Decorations</div>
+  <div class="service-item" onclick="go('flowers.html')">🌸 Flowers</div>
+  <div class="service-item" onclick="go('halls.html')">🏰 Halls</div>
+  <div class="service-item" onclick="go('makeup.html')">💄 Makeup</div>
+  <div class="service-item" onclick="go('mehandhi.html')">✋ Mehandhi</div>
+  <div class="service-item" onclick="go('catering.html')">🍽 Catering</div>
+  <div class="service-item" onclick="go('invitations.html')">💌 Invitations</div>
+  <div class="service-item" onclick="go('photographer.html')">📸 Photographer</div>
+  <div class="service-item" onclick="go('booking.html')">📅 Booking / Payment</div>
+</div>
+
+<div class="container">
+
+<div class="grid" id="grid"></div>
+
+<div class="details" id="details">
+  <div class="close" onclick="details.style.display='none'">✖</div>
+  <img id="mainImg">
+
+  <div class="sub-imgs" id="subs"></div>
+
+  <div class="bold-price">✋ Total Price : ₹<span id="price"></span></div>
+
+ <div class="box">
+  🏢 Mehandhi Studio : <span id="studioName"></span> <br>
+  👩 Artist : <span id="artistName"></span> <br>
+  📞 Phone : <span id="artistPhone"></span>
+</div>
+
+<div class="box">
+  ⭐ Experience : <span id="experience"></span> <br>
+  ✋ Other Services : <span id="servicesList"></span>
+</div>
+
+  <div class="stars">
+    <span onclick="rate(1)">★</span>
+    <span onclick="rate(2)">★</span>
+    <span onclick="rate(3)">★</span>
+    <span onclick="rate(4)">★</span>
+    <span onclick="rate(5)">★</span>
+  </div>
+
+  <button class="btn" onclick="addToCart()">🛒 Add to Cart</button>
+  <button class="btn" onclick="go('booking.html')">📅 Booking Now</button>
+</div>
+
+</div>
+
+<script>
+let products=[
+{
+img:"https://fsbridalmehndiartist.in/wp-content/uploads/2024/02/0076248001475654338.jpg",
+subs:[
+"https://5.imimg.com/data5/SELLER/Default/2023/5/305205566/EQ/WN/DH/141240516/mehndi-artist-in-lucknow-2-500x500.jpeg",
+"https://images.jdmagicbox.com/quickquotes/listicle/listicle_1714989530025_z8345_1000x562.jpg",
+"https://m.media-amazon.com/images/I/71twkcDYxHS._AC_UF350,350_QL80_.jpg"
+],
+price:3500,
+
+studio:"Royal Mehandhi Art",
+artist:"Ayesha",
+phone:"9123456780",
+
+exp:"8+ Years",
+services:"Bridal, Arabic, Traditional, Designer"
+},
+
+{
+img:"https://i.ytimg.com/vi/uQ_1GXXxx3I/maxresdefault.jpg",
+subs:[
+"https://i.pinimg.com/736x/ab/cb/15/abcb15b9ea740b80bc3542e1e9a8ac60.jpg",
+"https://i.ytimg.com/vi/inPGLWmeXJM/maxresdefault.jpg",
+"https://queenofhenna.com/wp-content/uploads/2025/01/full-hand-bridal-henna-stencil-1-pair-qh329-img-2-queenofhenna.jpg"
+],
+price:4200,
+
+studio:"Zara Mehandhi Studio",
+artist:"Zara",
+phone:"9876543210",
+
+exp:"5+ Years",
+services:"Arabic, Engagement, Minimal"
+},
+
+{
+img:"https://www.shaadidukaan.com/vogue/wp-content/uploads/2019/07/Classic-Indian-Bridal-Mehndi-Design-2.webp",
+subs:[
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTh6tHZ_pJRNwcuzQBs0f_3UpULThD_06OM-Q&s",
+"https://assets.minted.com/image/upload/f_auto,q_auto/Minted_Onsite_Assets/2022/LP/BridalMehndiDesigns_220822_Image03.jpg",
+"https://images.jansatta.com/2025/11/Full-hand-bridal-mehndi-design-8.jpg?w=440"
+],
+price:5200,
+
+studio:"Noor Bridal Mehandhi",
+artist:"Noor",
+phone:"9012345678",
+
+exp:"10+ Years",
+services:"Full Bridal, Mughal, Rajasthani"
+},
+
+{
+img:"https://dms.mydukaan.io/original/jpeg/903805/ef440c76-cac5-4e36-8769-d2c1840ac12e.png",
+subs:[
+"https://www.finetoshine.com/wp-content/uploads/2020/07/Amrita-Kale-on-Instagram-%E2%80%9CTraditional-full-hand-Bridal-Henna-Design.jpg",
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWq0rBeZKwcRKDvMBm09H_gFSAguSoXanQvg&s",
+"https://images.jansatta.com/2025/11/Full-hand-bridal-mehndi-designs.jpg?w=440"
+],
+price:5200,
+
+studio:"Juvai Bridal Mehandhi",
+artist:"Juvairiya",
+phone:"9087653421",
+
+exp:"5+ Years",
+services:"Full Bridal, Mughal, Rajasthani"
+},
+
+{
+img:"https://cdn.lazyshop.com/files/539d1916-df09-465f-b35f-59807116b463/product/94954d419716eca698c254e8c608039d.jpeg",
+subs:[
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY5_Sqyx35YhQv2RMkAPv1ASA6LeXVoKkyYg&s",
+"https://static.punjabkesari.in/multimedia/19_56_264103244bridal-mehndi-design-full-hand-photos7.jpg",
+"https://simplemehandidesigns.com/wp-content/uploads/2025/11/back-hand-mehndi-design-bridal-easy.webp"
+],
+price:4000,
+
+studio:"Anees Bridal Mehandhi",
+artist:"Anees",
+phone:"8976879054",
+
+exp:"10+ Years",
+services:"Full Bridal, Mughal, Rajasthani"
+},
+
+{
+img:"https://images.herzindagi.info/her-zindagi-english/images/2024/10/08/article/image/full-hand-mehndi-designs-1728388762024.webp",
+subs:[
+"https://simplemehandidesigns.com/wp-content/uploads/2025/11/wedding-new-dulhan-mehndi.webp",
+"https://simplemehandidesigns.com/wp-content/uploads/2025/11/Full-Hand-Bridal-Mehndi-Design-1024x1024.webp",
+"https://simplemehandidesigns.com/wp-content/uploads/2025/11/Back-Full-Hand-Bridal-Mehndi-Design.webp"
+],
+price:5000,
+
+studio:"Thasli Bridal Mehandhi",
+artist:"Thaslima",
+phone:"9032456788",
+
+exp:"12+ Years",
+services:"Full Bridal, Mughal, Rajasthani"
+},
+
+{
+img:"https://cdn.shopify.com/s/files/1/0561/7926/1589/files/Mandala_Magic_480x480.png?v=1706354515",
+subs:[
+"https://simplemehandidesigns.com/wp-content/uploads/2025/11/Bridal-Mehndi-Design-Photos.webp",
+"https://simplemehandidesigns.com/wp-content/uploads/2025/11/Bridal-Dulhan-Mehndi-Design.webp",
+"https://simplemehandidesigns.com/wp-content/uploads/2025/11/bridal-mehndi-design-1-1024x683.webp"
+],
+price:6000,
+
+studio:"Jesi Bridal Mehandhi",
+artist:"Jesima",
+phone:"9012345678",
+
+exp:"10+ Years",
+services:"Full Bridal, Mughal, Rajasthani"
+},
+
+{
+img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPWZUDlR1U-Xm7I3xX88FKe2sigDLMY2p2ug&s",
+subs:[
+"https://simplemehandidesigns.com/wp-content/uploads/2025/11/bridal-mehndi-design-back-hand.webp",
+"https://simplemehandidesigns.com/wp-content/uploads/2025/11/wedding-mehndi-designs-1024x647.webp",
+"https://simplemehandidesigns.com/wp-content/uploads/2025/11/meganthi-images-simple.webp"
+],
+price:5500,
+
+studio:"Fathima Bridal Mehandhi",
+artist:"Noorunisha",
+phone:"9907654532",
+
+exp:"10+ Years",
+services:"Full Bridal, Mughal, Rajasthani"
+}
+];
+
+
+grid.innerHTML="";
+products.forEach((p,i)=>{
+  grid.innerHTML+=`
+  <div class="card">
+    <img src="${p.img}" onclick="openDetails(${i})">
+    <div class="price-tag">✋ ₹${p.price} Full Package</div>
+    <div class="studio">🏢 ${p.studio}</div>
+  </div>`;
+});
+
+
+let current;
+function openDetails(index){
+  let p = products[index];
+  current=p;
+
+  details.style.display="block";
+  mainImg.src=p.img;
+  price.innerText=p.price;
+
+  studioName.innerText = p.studio;
+  artistName.innerText = p.artist;
+  artistPhone.innerText = p.phone;
+  experience.innerText = p.exp;
+  servicesList.innerText = p.services;
+
+  subs.innerHTML="";
+  p.subs.forEach(s=>{
+    subs.innerHTML+=`<img src="${s}" onclick="mainImg.src='${s}'">`;
+  });
+}
+
+
+
+function addToCart(){
+  let cart=JSON.parse(localStorage.getItem("cart"))||[];
+  cart.push({
+  category: "Mehandhi",
+  name: "Mehandhi Package",   // ⭐ important
+  price: current.price,
+  img: current.img,
+  qty: 1
+});
+
+  localStorage.setItem("cart",JSON.stringify(cart));
+  cartCount.innerText=cart.length;
+  window.location.href="cart.html";
+}
+
+cartCount.innerText=(JSON.parse(localStorage.getItem("cart"))||[]).length;
+
+function toggleServices(){
+  services.style.display = services.style.display==="block"?"none":"block";
+}
+function go(p){window.location.href=p;}
+
+function rate(n){
+  document.querySelectorAll(".stars span").forEach((s,i)=>{
+    s.classList.toggle("active",i<n);
+  });
+}
+</script>
+
+</body>
+</html>

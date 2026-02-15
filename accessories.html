@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Accessories | Wed Aura</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:white;
+}
+.filters{
+  margin-top:25px;   /* 👈 search keela gap */
+  display:flex;
+  justify-content:center;
+  gap:15px;
+}
+
+
+/* NAVBAR */
+/* NAVBAR – SAME AS PHOTOGRAPHER */
+nav{
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:#fff;
+  padding:15px 30px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.nav-left{
+  font-size:22px;
+  font-weight:900;
+}
+
+.nav-right{
+  display:flex;
+  gap:25px;
+  align-items:center;
+}
+
+.nav-right a{
+  color:white;
+  text-decoration:none;
+  font-weight:700;
+  cursor:pointer;
+  position:relative;
+}
+
+/* CART BADGE */
+.badge{
+  position:absolute;
+  top:-8px;
+  right:-12px;
+  background:red;
+  color:#fff;
+  font-size:11px;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+}
+
+/* SERVICE BUTTON */
+.service-btn{
+  background:rgba(255,255,255,.25);
+  padding:6px 14px;
+  border-radius:20px;
+}
+
+/* SERVICES DROPDOWN */
+.services-box{
+  display:none;
+  background:#fff;
+  padding:15px;
+  position:absolute;
+  top:65px;
+  right:30px;
+  width:280px;
+  border-radius:12px;
+  box-shadow:0 0 20px rgba(0,0,0,.2);
+  z-index:99;
+}
+.services-box h4{
+  text-align:center;
+  color:#800080;
+  margin-bottom:10px;
+}
+.service-item{
+  padding:8px;
+  border-radius:8px;
+  cursor:pointer;
+}
+.service-item:hover{
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:#fff;
+}
+
+/* FILTER */
+.filters{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  margin-bottom:10px;
+}
+.filters button{
+  padding:8px 20px;
+  border-radius:20px;
+  border:2px solid #800080;
+  background:white;
+  cursor:pointer;
+}
+.filters button.active{
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:white;
+  border:none;
+}
+
+/* MAIN */
+.main{
+  display:flex;
+  gap:20px;
+  padding:20px;
+}
+
+/* PRODUCTS */
+.products{
+  flex:1;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:15px;
+}
+.card{
+  border:1px solid #ddd;
+  border-radius:10px;
+  padding:8px;
+  cursor:pointer;
+}
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  border-radius:8px;
+}
+.card h4{
+  margin:6px 0 2px;
+}
+.card p{
+  margin:0;
+  font-weight:bold;
+  color:#c9184a;
+}
+
+/* DETAILS */
+.details{
+  width:35%;
+  border-left:1px solid #ddd;
+  padding:15px;
+  display:none;
+  position:relative;
+}
+.details img{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  border-radius:10px;
+}
+.close{
+  position:absolute;
+  top:5px;
+  right:10px;
+  font-size:22px;
+  cursor:pointer;
+}
+.buttons{
+  display:flex;
+  gap:10px;
+  margin-top:15px;
+}
+.buttons button{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:25px;
+  background:linear-gradient(90deg,#800080,#ff0000);
+  color:white;
+  cursor:pointer;
+}
+
+.cart-btn{
+ display:flex !important;
+ align-items:center;
+ gap:6px;
+ font-size:22px;
+}
+
+.nav-right{
+ flex-wrap:nowrap;
+}
+
+/* KEEP HOME & SERVICES WHITE */
+.nav-right a{
+  color:#fff;
+}
+
+/* ONLY CART ICON DARK */
+.nav-right a[href="cart.html"]{
+  color:#111;
+  font-size:22px;
+}
+
+/* CART COUNT – WHITE BUBBLE */
+.nav-right a[href="cart.html"] .badge{
+  background:#fff;
+  color:#000;
+  font-weight:800;
+}
+
+
+
+/* SEARCH BELOW NAV */
+.search-wrap{
+  margin-top:20px;
+  display:flex;
+  justify-content:center;
+}
+
+.nav-search{
+  position:relative;
+}
+
+.nav-search input{
+  width:260px;
+  padding:10px 38px 10px 16px;
+  border-radius:25px;
+  border:2px solid #000;   /* ⬅️ black border */
+  outline:none;
+}
+
+.nav-search input:focus{
+  border-color:#800080;
+}
+
+
+.nav-search span{
+  position:absolute;
+  right:14px;
+  top:9px;
+  font-size:18px;
+  cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+
+
+<nav>
+  <div class="nav-left">WED AURA - Accessories</div>
+
+  <div class="nav-right">
+    <a href="index.html">Home</a>
+    <a class="service-btn" onclick="toggleServices()">Services ▼</a>
+    <a href="cart.html">🛒 <span class="badge" id="cartCount">0</span></a>
+  </div>
+</nav>
+
+<!-- SERVICES DROPDOWN -->
+<div class="services-box" id="services">
+  <h4>OUR SERVICES</h4>
+  <div class="service-item" onclick="go('dress.html')">👗 Dresses</div>
+  <div class="service-item" onclick="go('accessories.html')">💍 Accessories</div>
+  <div class="service-item" onclick="go('decoration.html')">🎀 Decorations</div>
+  <div class="service-item" onclick="go('flowers.html')">🌸 Flowers</div>
+  <div class="service-item" onclick="go('halls.html')">🏰 Halls</div>
+  <div class="service-item" onclick="go('makeup.html')">💄 Makeup</div>
+  <div class="service-item" onclick="go('mehandi.html')">✋ Mehandhi</div>
+  <div class="service-item" onclick="go('catering.html')">🍽 Catering</div>
+  <div class="service-item" onclick="go('invitations.html')">💌 Invitations</div>
+  <div class="service-item" onclick="go('photographer.html')">📸 Photographer</div>
+  <div class="service-item" onclick="go('booking.html')">📅 Booking / Payment</div>
+</div>
+
+<!-- SEARCH BELOW NAVBAR -->
+<div class="search-wrap">
+  <div class="nav-search">
+    <input type="text" placeholder="Search accessories..."
+           onkeyup="search(this.value)">
+    <span>🔍</span>
+  </div>
+</div>
+
+
+
+
+<div class="filters">
+  <button class="active" onclick="filterItems('all',this)">All</button>
+  <button onclick="filterItems('bride',this)">Bride</button>
+  <button onclick="filterItems('groom',this)">Groom</button>
+</div>
+
+<div class="main">
+  <div class="products" id="products"></div>
+  <div class="details" id="details"></div>
+</div>
+
+<script>
+/* PRODUCT DATA */
+const items=[];
+
+/* 🔹 Bride images – replace links anytime */
+const brideImages=[
+ "https://sujwel.com/cdn/shop/files/153.1-800.png?v=1726049673",
+ "https://www.urvaa.com/wp-content/uploads/2024/08/bjsetgreenset.jpg",
+ "https://artofgold.in/wp-content/uploads/2019/12/N-Aq-409.jpeg",
+ "https://static.wixstatic.com/media/b69f5d_0846239d1169487eb20373ee784d8bb7~mv2.jpg/v1/fill/w_736,h_736,al_c,q_85/b69f5d_0846239d1169487eb20373ee784d8bb7~mv2.jpg",
+ "https://i.ytimg.com/vi/XY5j9NF_vq8/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLCH_x_kxsxtR7N3_kEx5i58Jomtdg",
+ "https://tajbridalstore.in/cdn/shop/files/Untitled_a37d5323-430d-4ccc-aade-5078509dd351.webp?v=1708247473",
+ "https://5.imimg.com/data5/SELLER/Default/2024/10/461182960/VH/VK/RM/91320786/b4-500x500.jpg",
+ "https://libasaa.com/cdn/shop/files/libasaa00598-2.png?v=1756897893",
+ "https://ae01.alicdn.com/kf/S1c77cd1a4e4a430a8d8434f4eb7f7bbdq.jpg",
+ "https://cdn-media.glamira.com/media/product/newgeneration/view/1/sku/jade05-n1/diamond/diamond-Brillant_AAA/stone2/diamond-zirconia_AAAAA/alloycolour/yellow_white.jpg",
+ "https://www.kushals.com/cdn/shop/files/zircon-finger-ring-green-rodium-gold-zircon-finger-ring-185600-1176225505.jpg?v=1751471592&width=1200",
+ "https://i.pinimg.com/736x/f1/d5/6e/f1d56ef9f6a20c84b7cafc84337672ee.jpg",
+ "https://i.ytimg.com/vi/DnQxHWHYxr4/maxresdefault.jpg",
+ "https://i.ytimg.com/vi/nGzBEchEsUU/maxresdefault.jpg",
+ "https://www.sneharateria.com/cdn/shop/files/Regal_Emerald_Brilliance-_Exquisite_Diamond_Look_Bridal_Earrings3_1200x1200.jpg?v=1743245913"
+];
+
+for(let i=1;i<=15;i++){
+ items.push({
+  id:i,
+  type:"bride",
+  name:"Bride Jewellery "+i,
+  brand:"Tanishq",
+  price:2000+i*300,
+  img:brideImages[i-1]
+ });
+}
+
+/* 🔹 Groom images – replace links anytime */
+const groomImages=[
+ "https://i.etsystatic.com/12876856/r/il/4b7182/5291068441/il_fullxfull.5291068441_iov7.jpg",
+ "https://thumbs.dreamstime.com/b/flat-lay-elegant-groom-accessories-black-table-shiny-shoes-golden-watch-cufflinks-bow-tie-perfume-whiskey-bottle-416427938.jpg",
+ "https://m.media-amazon.com/images/I/71AGm6hD8tL._AC_UF350,350_QL80_.jpg",
+ "https://img2.junaroad.com/uiproducts/21313808/pri_175_p-1717987106.jpg",
+ "https://masukjewellers.com/cdn/shop/files/8e981207-27bf-4bc4-ac48-7ad783c4a510.jpg?v=1729792596&width=1445",
+ "https://m.media-amazon.com/images/I/81OOmo1kfNL._AC_UF350,350_QL80_.jpg",
+ "https://www.shutterstock.com/image-photo/wedding-accessories-bride-groom-rings-260nw-1106944142.jpg",
+ "https://previews.123rf.com/images/adilcelebiyev/adilcelebiyev1710/adilcelebiyev171000217/88140657-black-men-s-shoes-for-wedding-preparation-and-perfume.jpg",
+ "https://thumbs.dreamstime.com/b/man-s-style-shoes-tie-perfume-shoes-tie-perfume-102170578.jpg",
+ "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcLtJiu3Oz03vaUlq2RAS8eIAC331U_6Bleg&s",
+ "https://images.thebridesofoklahoma.com/wp-content/uploads/blog/13621/boo_groomsrings_1.jpg",
+ "https://kinclimg9.bluestone.com/f_jpg,c_scale,w_1024,q_80,b_rgb:f0f0f0/giproduct/BD-R36_YAA18DIG6XXXXXXXX_ABCD00-PICS-00001-1024-18276.png",
+ "https://babitaagrawaljewellery.in/wp-content/uploads/2025/12/Groom-Jewellery-Essential-3.jpg",
+ "https://m.media-amazon.com/images/I/51hNsGzXWuL._AC_UY1100_.jpg",
+ "https://sunglassic.com/cdn/shop/files/PhantomGunBlackHexagonSunglasses_1__sunglassic.jpg?v=1747916544&width=2048"
+];
+
+for(let i=1;i<=15;i++){
+ items.push({
+  id:20+i,
+  type:"groom",
+  name:"Groom Product "+i,
+  brand:"Titan",
+  price:2500+i*300,
+  img:groomImages[i-1]
+ });
+}
+
+const products=document.getElementById("products");
+
+/* LOAD PRODUCTS */
+function loadProducts(data){
+ products.innerHTML="";
+ data.forEach(p=>{
+  products.innerHTML+=`
+   <div class="card" onclick="showDetailsById(${p.id})">
+    <img src="${p.img}">
+    <h4>${p.name}</h4>
+    <p>₹${p.price}</p>
+   </div>
+  `;
+ });
+}
+document.addEventListener("DOMContentLoaded", () => {
+ loadProducts(items);
+});
+
+
+/* SHOW DETAILS */
+function showDetails(index){
+ const p=items[index];
+ const d=document.getElementById("details");
+ d.style.display="block";
+ d.innerHTML=`
+  <span class="close" onclick="closeDetails()">❌</span>
+  <img src="${p.img}">
+  <h3>${p.name}</h3>
+  <p>Brand: ${p.brand}</p>
+  <h2>₹${p.price}</h2>
+  <div class="buttons">
+    <button onclick="addToCart(${index})">🛒 Add to Cart</button>
+    <button onclick="buyNow(${index})">⚡ Buy Now</button>
+  </div>
+ `;
+}
+
+function closeDetails(){
+ document.getElementById("details").style.display="none";
+}
+
+function addToCart(index){
+ let cart=JSON.parse(localStorage.getItem("cart"))||[];
+ cart.push(items[index]);
+ localStorage.setItem("cart",JSON.stringify(cart));
+ window.location.href="cart.html";
+}
+
+function buyNow(index){
+ localStorage.setItem("cart",JSON.stringify([items[index]]));
+ window.location.href="cart.html";
+}
+
+function filterItems(type,btn){
+ document.querySelectorAll(".filters button").forEach(b=>b.classList.remove("active"));
+ btn.classList.add("active");
+ type==="all"?loadProducts(items):loadProducts(items.filter(x=>x.type===type));
+ closeDetails();
+}
+
+function search(value){
+ value=value.toLowerCase();
+ loadProducts(items.filter(x=>x.name.toLowerCase().includes(value)));
+ closeDetails();
+}
+
+function addToCartById(id){
+ let cart = JSON.parse(localStorage.getItem("cart")) || [];
+ const item = items.find(x => x.id === id);
+ cart.push(item);
+ localStorage.setItem("cart",JSON.stringify(cart));
+ window.location.href="cart.html";
+}
+
+function buyNowById(id){
+ const item = items.find(x => x.id === id);
+ localStorage.setItem("cart",JSON.stringify([item]));
+ window.location.href="cart.html";
+}
+
+
+
+</script>
+
+<script>
+/* SERVICES DROPDOWN */
+function toggleServices(){
+ const menu = document.getElementById("servicesMenu");
+ menu.classList.toggle("show");
+}
+
+/* CLICK SERVICE */
+function selectService(el){
+ // remove active from all
+ document.querySelectorAll("#servicesMenu div")
+ .forEach(i=>i.classList.remove("active"));
+
+ // add active to clicked
+ el.classList.add("active");
+
+ const link = el.getAttribute("data-link");
+ if(link){
+   window.location.href = link;
+ }
+}
+
+/* CLOSE DROPDOWN WHEN CLICK OUTSIDE */
+document.addEventListener("click",function(e){
+ const services=document.querySelector(".services");
+ if(!services.contains(e.target)){
+  document.getElementById("servicesMenu").classList.remove("show");
+ }
+});
+
+/* CART COUNT */
+function updateCart(){
+ let cart = JSON.parse(localStorage.getItem("cart")) || [];
+ const c = document.getElementById("cartCount");
+ if(c) c.innerText = cart.length;
+}
+updateCart();
+</script>
+
+</script>
+
+<script>
+function toggleServices(){
+  services.style.display =
+    services.style.display === "block" ? "none" : "block";
+}
+
+function go(p){
+  window.location.href = p;
+}
+
+function updateCartCount(){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cartCount.innerText = cart.length;
+}
+updateCartCount();
+
+function showDetailsById(id){
+ const p = items.find(x => x.id === id);
+ const d = document.getElementById("details");
+
+ d.style.display="block";
+ d.innerHTML=`
+  <span class="close" onclick="closeDetails()">❌</span>
+  <img src="${p.img}">
+  <h3>${p.name}</h3>
+  <p>Brand: ${p.brand}</p>
+  <h2>₹${p.price}</h2>
+  <div class="buttons">
+    <button onclick="addToCartById(${p.id})">🛒 Add to Cart</button>
+    <button onclick="buyNowById(${p.id})">⚡ Buy Now</button>
+  </div>
+ `;
+}
+
+</script>
+
+
+
+
+</body>
+</html>

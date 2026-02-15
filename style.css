@@ -1,0 +1,464 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #f9f5f9;
+  color: #330033;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background: linear-gradient(90deg, #800080, #ff0000); /* Purple to Red */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo-img {
+  width: 60px;
+  height: 60px;
+}
+
+.logo-text {
+  font-size: 28px;
+  font-weight: 900;
+  background: linear-gradient(90deg, #c0c0c0, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+}
+
+/* Nav */
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  list-style: none;
+}
+
+nav ul li a {
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: 0.3s;
+  color: silver;
+}
+
+nav ul li a.active,
+nav ul li a:hover {
+  color: #ffffff;
+  background: rgba(255,255,255,0.2);
+}
+
+/* Hero Section */
+.hero {
+  background: url('assets/wedding-bg.jpg') no-repeat center center/cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  padding: 0 20px;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+}
+
+.hero-content h1 {
+  font-size: 56px;
+  font-weight: 900;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 12px rgba(0,0,0,0.6);
+}
+
+.hero-content p {
+  font-size: 22px;
+  margin-bottom: 25px;
+  text-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+}
+
+.btn-hero {
+  padding: 18px 40px;
+  background: #ff0000;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn-hero:hover {
+  background: #cc0000;
+}
+
+/* Services */
+.services {
+  padding: 70px 20px;
+  text-align: center;
+  background: #f4f0f5;
+}
+
+.services h2 {
+  font-size: 36px;
+  margin-bottom: 50px;
+  color: #800080;
+}
+
+.service-box-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.service-box {
+  width: 270px;
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  border: 2px solid silver;
+  box-shadow: 0 0 20px rgba(128,0,128,0.2);
+  transition: 0.3s;
+  text-align: center;
+}
+
+.service-box h3 {
+  color: #800080;
+  margin-bottom: 12px;
+}
+
+.service-box p {
+  font-size: 15px;
+  color: #330033;
+  margin-bottom: 18px;
+}
+
+.service-box:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 25px silver;
+}
+
+/* Footer */
+footer {
+  background: linear-gradient(90deg, #800080, #ff0000);
+  color: silver;
+  text-align: center;
+  padding: 20px;
+  font-size: 16px;
+}
+/* ===== Dashboard Hero ===== */
+.dashboard-hero {
+  background: url('../assets/wedding-bg.jpg') no-repeat center/cover;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.dashboard-hero::before {
+  content:'';
+  position: absolute;
+  top:0; left:0; width:100%; height:100%;
+  background: rgba(128,0,128,0.5);
+  z-index:1;
+}
+
+.dashboard-hero-content {
+  position: relative;
+  z-index:2;
+  color:white;
+}
+
+.dashboard-hero-content h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.dashboard-hero-content p {
+  font-size: 20px;
+  text-shadow: 1px 1px 8px rgba(0,0,0,0.5);
+}
+
+/* ===== Cards ===== */
+.dashboard-cards-section {
+  padding: 40px 20px;
+  background: #f4f0f5;
+}
+
+.dashboard-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  width: 220px;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.card h3 {
+  color: #800080;
+  margin-bottom: 10px;
+}
+
+.btn-card {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #ff0000;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.btn-card:hover {
+  background: #cc0000;
+}
+.catering-section {
+  padding: 60px 20px;
+  text-align: center;
+  background: #f4f0f5;
+}
+
+.catering-section h2 {
+  font-size: 36px;
+  color: #800080;
+  margin-bottom: 40px;
+}
+
+/* MENU BUTTONS */
+.menu-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.menu-buttons button {
+  padding: 14px 30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background: linear-gradient(90deg, #800080, #ff0000);
+  color: white;
+  transition: 0.3s;
+}
+
+.menu-buttons button:hover {
+  transform: scale(1.08);
+}
+
+/* MENU CONTENT */
+.menu-content {
+  display: flex;
+  justify-content: center;
+}
+
+.menu-box {
+  display: none;   /* 👈 இதுதான் முக்கிய fix */
+  width: 320px;
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  border: 2px solid silver;
+  box-shadow: 0 0 20px rgba(128,0,128,0.2);
+}
+
+
+.menu-box h3 {
+  color: #800080;
+  margin-bottom: 15px;
+}
+
+.menu-box ul {
+  list-style: none;
+}
+
+.menu-box ul li {
+  padding: 6px 0;
+  font-size: 16px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.menu-price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff0000;
+  margin: 15px 0;
+}
+
+.book-btn {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background: linear-gradient(90deg, #800080, #ff0000);
+  color: white;
+  transition: 0.3s;
+}
+
+.book-btn:hover {
+  transform: scale(1.08);
+}
+
+
+.booking-box {
+  width: 350px;
+  margin: 40px auto;
+  padding: 25px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(128,0,128,0.3);
+}
+
+.booking-box input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0 20px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.booking-box textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+
+
+.success-box {
+  display: none;
+  text-align: center;
+  margin-top: 100px;
+}
+
+.checkmark {
+  font-size: 80px;
+  color: green;
+  animation: pop 0.6s ease-in-out;
+}
+
+@keyframes pop {
+  0% { transform: scale(0); }
+  80% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.btn-book {
+  padding: 12px 25px;
+  background: linear-gradient(90deg, #800080, #ff0000); /* same as navbar */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-book:hover {
+  opacity: 0.85;
+}
+
+/* ===== Payment Success Animation ===== */
+
+.success-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.success-box {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  animation: popUp 0.6s ease;
+}
+
+.checkmark {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: linear-gradient(90deg, #800080, #ff0000);
+  color: white;
+  font-size: 50px;
+  line-height: 80px;
+  animation: scaleCheck 0.6s ease;
+}
+
+@keyframes popUp {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleCheck {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
